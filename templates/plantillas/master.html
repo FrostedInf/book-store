@@ -1,10 +1,13 @@
+{% from 'plantillas/_header.html' import header %}
+{% from 'plantillas/_nav.html' import nav %}
+{% from 'plantillas/_footer.html' import footer %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{% block title %}{%enblock%}</title>
+    <title>{% block title %} {% endblock %}</title>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/font-awesome.min.css')}}">
@@ -21,32 +24,15 @@
     <![endif]-->
 </head>
 <body>
-    <header>
-        
-    </header>
-    {%block  content%} 
-    {%enblock%}
-    <footer>
-        <div class="last-div">
-                <div class="container">
-                    <div class="row">
-                        <ul class="social-network text-center">
-                        <li><a href="#" data-placement="top" title="Facebook"><i class="fa fa-facebook fa-1x"></i></a></li>
-                        <li><a href="#" data-placement="top" title="Twitter"><i class="fa fa-twitter fa-1x"></i></a></li>
-                        <li><a href="#" data-placement="top" title="Linkedin"><i class="fa fa-linkedin fa-1x"></i></a></li>
-                        <li><a href="#" data-placement="top" title="Google plus"><i class="fa fa-google-plus fa-1x"></i></a></li>
-                        <li><a href="#" data-placement="top" title="Instagram"><i class="fa fa-instagram fa-1x"></i></a></li>
-                        </ul>
-                        <div class="copyright text-center">
-                            <p style="color: white;">©  2017 Pshopper School <span>Todos los derechos reservados</span></p>
-                        </div>
-                        <nav class="foot-nav">
-                        </nav>
-                    </div>
-                </div>
-                <a href="" class="scrollup"><i class="fa fa-chevron-up"></i></a>	
-            </div>
-    </footer>
+
+    {{ nav()}}
+
+    {{ header()}}
+
+    {% block  content %} 
+    {% endblock %}
+
+    {{ footer() }}
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->	
     <script src="{{url_for('static', filename='js/jquery-2.1.1.min.js')}}"></script>	
     <!-- Include all compiled plugins (below), or include individual files as needed -->
