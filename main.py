@@ -11,5 +11,17 @@ def index():
 def header():
     return render_template('contact.html')
 
+@app.route("/tienda")
+def tienda():
+    return render_template('tienda.html')
+
+@app.route("/carrito")
+def carrito():
+    return render_template('carrito.html')
+
+@app.route("/perfil")
+def perfil():
+    return render_template('perfil.html')
+    
 if __name__ == '__main__':
     app.run(debug=True)

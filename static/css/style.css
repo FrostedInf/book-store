@@ -249,8 +249,9 @@ General settings
 
 .navbar-brand img {
 
-	width: 116px;
-	height: 40px;
+	width: 180px;
+
+    height: 49px;
 
 }
 
@@ -273,7 +274,7 @@ General settings
 }
 
 .menu ul.nav-tabs li img {
-	width: 25px
+	width: 40px
 
 }
 .menu ul.nav-tabs {
@@ -288,7 +289,7 @@ General settings
   
 }
 .nav-tabs > li > a {	
-	line-height: 1.42857143;
+	line-height: 1;
 	color:#333;
 }
 

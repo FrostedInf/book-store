@@ -1,0 +1,52 @@
+
+{% from 'plantillas/_nav.html' import nav %}
+{% from 'plantillas/_footer.html' import footer %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %} {% endblock %}</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/font-awesome.min.css')}}">
+	<link rel="stylesheet" href="{{url_for('static', filename='css/jquery.bxslider.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/isotope.css')}}" media="screen" />	
+	<link rel="stylesheet" href="{{url_for('static', filename='css/animate.css')}}">
+	<link rel="stylesheet" href="{{url_for('static', filename='js/fancybox/jquery.fancybox.css')}}" type="text/css" media="screen" />
+	<link href="{{url_for('static', filename='css/style.css')}}" rel="stylesheet">	
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+    {{ nav()}}
+
+    
+
+    {% block  content %} 
+    {% endblock %}
+
+    {{ footer() }}
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->	
+    <script src="{{url_for('static', filename='js/jquery-2.1.1.min.js')}}"></script>	
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/wow.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/fancybox/jquery.fancybox.pack.js')}}"></script>
+    <script src="{{url_for('static', filename='js/jquery.easing.1.3.js')}}"></script>
+    <script src="{{url_for('static', filename='js/jquery.bxslider.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/functions.js')}}"></script>
+    <script>
+    wow = new WOW(
+     {
+        }	) 
+        .init();
+    </script>
+</body>
+</html>

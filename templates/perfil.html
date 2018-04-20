@@ -1,0 +1,123 @@
+{% extends 'plantillas/perfilPlantilla.html' %}
+    {% block content %}
+
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+
+<br>
+<div class="col-md-12">  
+    <div class="col-md-4">      
+        <div class="portlet light profile-sidebar-portlet bordered">
+            <div class="profile-userpic">
+                <img src="{{url_for('static', filename='img/nav_bar_logo/user.png')}}" class="img-responsive" alt=""> </div>
+            <div class="profile-usertitle">
+              <br></br>
+                <div class="center-block" class="profile-usertitle-name">.          Juanito Lopez </div>
+                <div class="profile-usertitle-job">.       Tienda </div>
+            </div>
+            <div class="profile-userbuttons" class="portfolio-desc align-center">
+              <button type="button" class="btn btn-primary btn-sm">Editar</button>
+
+                
+                
+            </div>
+            <div class="profile-usermenu" >
+                <ul class="nav">
+                    <li class="active">
+                        <a href="#">
+                            <i class="icon-home"></i> Historial de compra </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="icon-settings"></i> Datos generales </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8"> 
+        <div class="portlet light bordered">
+            <div class="portlet-title tabbable-line">
+                <div class="caption caption-md">
+                    <i class="icon-globe theme-font hide"></i>
+                    <span class="caption-subject font-blue-madison bold uppercase">Historial de compra</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID PRODUCTO</th>
+                            <th> FECHA</th>
+                            <th> NO. ARTICULOS</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="active">
+                            <th scope="row">1</th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="success">
+                            <th scope="row">3</th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">4</th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        
+                        <tr>
+                            <th scope="row">5</th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="warning">
+                            <th scope="row">6</th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">7</th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="danger">
+                            <th scope="row">8</th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="danger">
+                            <th scope="row">9</th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+     {% endblock %}
