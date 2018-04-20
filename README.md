@@ -12,4 +12,4 @@
 Por favor cambiar la configuración de la base de datos en el archivo de config.py cambiando
 los datos de la lista de esta manera.
 
-    'mysql://username:password@localhost/databaseName'
+    'mysql+pymysql://username:password@localhost/databaseName'
