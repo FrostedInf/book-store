@@ -45,6 +45,10 @@ def index():
 def header():
     return render_template('contact.html')
 
+@app.route("/busqueda")
+def fn():
+	return render_template('busqueda.html')
+	
 @app.route("/tienda")
 def tienda():
     return render_template('tienda.html')
