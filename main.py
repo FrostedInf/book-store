@@ -42,8 +42,22 @@ def index():
     return render_template('index.html', title = title, conectado = conectado)
 
 @app.route('/contact')
-def header():
+def contactView():
     return render_template('contact.html')
+
+@app.route('/registro', methods = ['GET', 'POST'])
+def register():
+    form = forms.UserFormRegister(request.form)
+    if request.method == 'POST' and form.validate():
+        user = User( form.username.data,
+        form.email.data,
+        form.password.data
+        )
+        db.session.add(user)
+        db.session.commit()
+        flash('Usuario registrado en la base de datos')
+
+    return render_template('registro.html' ,form = form)
 
 @app.route("/busqueda")
 def fn():
@@ -66,9 +80,15 @@ def login():
     login_form = forms.LoginForm(request.form)
     if request.method == 'POST' and login_form.validate():
         username = login_form.username.data
-        flash('Bienvenido {}'.format(username))
-        session['username'] = login_form.username.data
-        session['password'] = login_form.password.data
+        password = login_form.password.data
+        user = User.query.filter_by(username = username).first()
+        if user is not None and user.verify_password(password):
+            flash('Bienvenido {}'.format(username))
+            session['username'] = login_form.username.data
+            session['password'] = login_form.password.data
+            return redirect(url_for('index'))
+        else:
+            flash('usuario no encontrado')
     return render_template('login.html', form = login_form)
 
 @app.route('/logout', methods = ['GET', 'POST'])
@@ -80,14 +100,6 @@ def logout():
 @app.route('/admin_home')
 def adminHomeView():
     return render_template('admin_views/admin_home.html')
-
-@app.route('/consultar_stock')
-def stockView():
-    return render_template('admin_views/consultar_stock.html')
-
-@app.route('/consultar_stock')
-def stockView():
-    return render_template('admin_views/consultar_stock.html')
 
 if __name__ == '__main__':
     csrf.init_app(app)
