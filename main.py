@@ -97,9 +97,6 @@ def logout():
         session.pop('username')
     return redirect(url_for('login'))
 # Admin Controllers
-@app.route('/admin_home')
-def adminHomeView():
-    return render_template('admin_views/admin_home.html')
 
 if __name__ == '__main__':
     csrf.init_app(app)
