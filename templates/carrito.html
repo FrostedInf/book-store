@@ -1,9 +1,5 @@
 {% extends 'plantillas/carritoPlantilla.html' %}
 	{% block content %}
-
-	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -23,11 +19,11 @@
         <div class="col col-xs-5 text-center">
             <h1 class="panel-title">MI CARRITO DE COMPRA</h1>
         </div>
-        <div class="col col-xs-2 well text-center" style="padding:1px;">    
+        <div class="col col-xs-2 well text-center" style="padding:1px;">
             <span class="label label-danger">Filtro:</span>
             <button id="ok"  class="btn btn-primary" data-class="btn btn-primary" onclick="filter('ok')"><i class="fa fa-user" aria-hidden="true"></i></button>
-            
-            <button id="new" class="btn btn-success" data-class="btn btn-success" onclick="filter('new')"><i class="fa fa-check-square" aria-hidden="true"></i></button> 
+
+            <button id="new" class="btn btn-success" data-class="btn btn-success" onclick="filter('new')"><i class="fa fa-check-square" aria-hidden="true"></i></button>
         </div>
         <div class="col col-xs-2 text-right ">
           <button type="button" class="btn  btn-success "> Agregar <i class="fa fa-plus-square" ></i></button>
@@ -45,7 +41,7 @@
             <th>Precio</th>
             <th>Detalles</th>
             <th><em class="fa fa-cog"></em></th>
-          </tr> 
+          </tr>
          </thead>
          <tbody>
           <tr class="ok">
@@ -65,7 +61,7 @@
              <td>negro, luz led </td>
              <td align="center">
                <a href="#" class="btn btn-primary" title="Edit"    ><i class="fa fa-pencil">    	</i></a>
-      
+
                <a href="#" class="btn btn-danger"  title="delete"  ><i class="fa fa-trash" >		</i></a>
              </td>
           </tr>
@@ -82,11 +78,11 @@
           </tbody>
         </table>
       </div><!-- END id="list" -->
-        
+
       <div role="tabpanel" class="tab-pane " id="thumb">
         <div class="row">
         <div class="col-md-12">
-        
+
         <div class="ok">
          <div class="col-md-3">
          <div class="panel panel-default panel-thumb">
@@ -97,13 +93,13 @@
    			 <img src="{{url_for('static', filename='img/portfolio/libro3.png')}}" class="fancybox" alt="Brand">
             <div class="panel-footer">
                <a href="#" class="btn btn-primary" title="Edit"    ><i class="fa fa-pencil"></i></a>
-               
+
                <a href="#" class="btn btn-danger"  title="delete"  ><i class="fa fa-trash" ></i></a>
             </div>
          </div>
 		 </div>
        </div>
-      	
+
         <div class="ban">
          <div class="col-md-3">
          <div class="panel panel-default panel-thumb">
@@ -119,7 +115,7 @@
          </div>
 		 </div>
        </div>
-        
+
         <div class="new">
          <div class="col-md-3">
          <div class="panel panel-default panel-thumb">
@@ -130,22 +126,22 @@
    			 <img src="{{url_for('static', filename='img/portfolio/mouse.png')}}" class="fancybox" alt="Brand">></td>
             <div class="panel-footer">
                <a href="#" class="btn btn-primary" title="Edit"    ><i class="fa fa-pencil"	  >		</i></a>
-        	   
+
                <a href="#" class="btn btn-danger"  title="delete"  ><i class="fa fa-trash"	   >		</i></a>
             </div>
          </div>
 		 </div>
        </div>
-       
+
        </div>
       </div>
       </div><!-- END id="thumb" -->
 
       <button type="button" class="btn btn-primary btn-lg btn-block">Finalizar compra</button>
-       
-     </div><!-- END tab-content --> 
+
+     </div><!-- END tab-content -->
     </div>
-   
+
    <div class="panel-footer text-center">
    		<ul class="pagination">
 	 	  <li ><a>«</a></li>

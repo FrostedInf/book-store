@@ -1,7 +1,7 @@
-{% macro nav() %}
+{% macro nav(conectado) %}
 <nav class="navbar navbar-default navbar-static-top" role="navigation">
         <div class="navigation">
-            <div class="container">					
+            <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse.collapse">
                         <span class="sr-only">Toggle navigation</span>
@@ -13,20 +13,27 @@
                         <img src="{{url_for('static', filename='img/nav_bar_logo/book4.png')}}" alt="Brand">
                     </div>
                 </div>
-                
-                <div class="navbar-collapse collapse">							
+
+                <div class="navbar-collapse collapse">
                     <div class="menu">
                         <ul class="nav nav-tabs" role="tablist">
                             <li  role="presentation"><a href="/" class="active">Inicio</a></li>
+                            {% if conectado %}
                             <li role="presentation"><a href="/tienda">Tienda</a></li>
                             <li role="presentation"><a href="/carrito">Mi Carrito</a></li>
+                            {% endif %}
                             <li role="presentation"><a href="/contact">Contacto</a></li>
                             <li role="presentation"><a href="/busqueda">Busqueda</a></li>
+                            {% if conectado %}
                             <li role="presentation"><a href="/perfil">Perfil</a></li>
-                        </ul> 
+                            <li role="presentation"><a href="/logout">Logout</a></li>
+                            {% else %}
+                            <li role="presentation"><a href="/login">Login</a></li>
+                            {% endif %}
+                        </ul>
                     </div>
-                </div>						
+                </div>
             </div>
-        </div>	
+        </div>
     </nav>
 {% endmacro %}

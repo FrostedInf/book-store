@@ -12,10 +12,10 @@
     <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/font-awesome.min.css')}}">
 	<link rel="stylesheet" href="{{url_for('static', filename='css/jquery.bxslider.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/isotope.css')}}" media="screen" />	
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/isotope.css')}}" media="screen" />
 	<link rel="stylesheet" href="{{url_for('static', filename='css/animate.css')}}">
 	<link rel="stylesheet" href="{{url_for('static', filename='js/fancybox/jquery.fancybox.css')}}" type="text/css" media="screen" />
-	<link href="{{url_for('static', filename='css/style.css')}}" rel="stylesheet">	
+	<link href="{{url_for('static', filename='css/style.css')}}" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -25,16 +25,16 @@
 </head>
 <body>
 
-    {{ nav()}}
+    {{ nav(conectado)}}
 
-    
 
-    {% block  content %} 
+
+    {% block  content %}
     {% endblock %}
 
     {{ footer() }}
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->	
-    <script src="{{url_for('static', filename='js/jquery-2.1.1.min.js')}}"></script>	
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="{{url_for('static', filename='js/jquery-2.1.1.min.js')}}"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
     <script src="{{url_for('static', filename='js/wow.min.js')}}"></script>
@@ -45,7 +45,7 @@
     <script>
     wow = new WOW(
      {
-        }	) 
+        }	)
         .init();
     </script>
 </body>

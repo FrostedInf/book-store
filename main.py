@@ -23,7 +23,11 @@ def page_not_found(e):
 
 @app.before_request
 def before_ver():
-    pass
+        g.conectado = False
+        if 'username' in session:
+            g.conectado = True
+        if 'username' not in session and request.endpoint in ['perfil', 'carrito', 'tienda']:
+            return redirect(url_for('login'))
 
 @app.after_request
 def after_ver(response):
@@ -32,18 +36,12 @@ def after_ver(response):
 #User Controllers
 @app.route('/')
 def index():
-    title = "Titulo"
-    conectado = "No"
-    if 'username' in session:
-        username = session['username']
-        conectado = "Yes"
-        print (username)
-        print (conectado)
-    return render_template('index.html', title = title, conectado = conectado)
+    title = "Inicio"
+    return render_template('index.html', title = title, conectado = g.conectado)
 
 @app.route('/contact')
 def contactView():
-    return render_template('contact.html')
+    return render_template('contact.html', conectado = g.conectado)
 
 @app.route('/registro', methods = ['GET', 'POST'])
 def register():
@@ -60,21 +58,21 @@ def register():
     return render_template('registro.html' ,form = form)
 
 @app.route("/busqueda")
-def fn():
-	return render_template('busqueda.html')
-	
+def busqueda():
+	return render_template('busqueda.html', conectado = g.conectado)
+
 @app.route("/tienda")
 def tienda():
-    return render_template('tienda.html')
+    return render_template('tienda.html', conectado = g.conectado)
 
 @app.route("/carrito")
 def carrito():
-    return render_template('carrito.html')
+    return render_template('carrito.html', conectado = g.conectado)
 
 @app.route("/perfil")
 def perfil():
-    return render_template('perfil.html')
-    
+    return render_template('perfil.html', conectado = g.conectado)
+
 @app.route('/login', methods = ['GET', 'POST'] )
 def login():
     login_form = forms.LoginForm(request.form)
@@ -97,6 +95,9 @@ def logout():
         session.pop('username')
     return redirect(url_for('login'))
 # Admin Controllers
+@app.route('/admin', methods = ['GET', 'POST'])
+def admin():
+    return render_template('admin_views/admin_home.html', conectado = g.conectado)
 
 if __name__ == '__main__':
     csrf.init_app(app)
