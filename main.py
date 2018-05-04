@@ -9,6 +9,7 @@ from flask import flash
 from flask import g
 from models import db
 from models import User
+from models import Books
 from flask_wtf import CSRFProtect
 from config import DevelomentConfig
 import forms
@@ -57,9 +58,17 @@ def register():
 
     return render_template('registro.html' ,form = form)
 
-@app.route("/busqueda")
+@app.route("/busqueda", methods=['GET', 'POST'])
 def busqueda():
-	return render_template('busqueda.html', conectado = g.conectado)
+    form = forms.busquedaForm(request.form)
+    if request.method == 'POST' and form.validate():
+        item = form.busqueda.data
+        resultado = Books.query.filter(Books.titulo.startswith(item)).all()
+        if len(resultado) > 0:
+            return render_template('libros.html',resultado=resultado , form = form)
+        else:
+            return render_template('busqueda0.html', form = form) 
+    return render_template('busqueda.html', conectado = g.conectado, form = form,resultado=Books.query.all())
 
 @app.route("/tienda")
 def tienda():

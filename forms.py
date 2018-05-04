@@ -22,3 +22,7 @@ class UserFormRegister(Form):
         user = User.query.filter_by(username = username).first()
         if user is not None:
             raise validators.ValidationError('El usuario ya se encuentra registrado')
+
+class busquedaForm(Form):
+    busqueda = StringField('busqueda')
+        
