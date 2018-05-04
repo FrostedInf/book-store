@@ -1,0 +1,18 @@
+{% extends "plantillas/adminLayout.html" %}
+{% block content %}
+<div id="page-content-wrapper">
+        <div class="container-fluid">
+            <h3>Datos del usuario</h3>
+            <div class="col-md-12">
+            <ul class="list-group">
+              <li class="list-group-item">Nombre del usuario: {{usuario.username}}</li>
+              <li class="list-group-item">Correo del usuario: {{usuario.email}}</li>
+            </ul>
+            </div>
+        </div>
+        <div class="col-md-12">
+          <a href="/admin">Regresa</a>
+        </div>
+</div>
+
+{% endblock  %}

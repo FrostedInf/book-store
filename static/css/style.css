@@ -41,7 +41,7 @@ a {
 }
 a:hover {
   text-decoration: none;
-  color:#eee;	
+  color:#061524;	
 }
 
 ul.social-network {
@@ -353,39 +353,12 @@ box-shadow: 1px 2px 2px 4px rgba(204,204,204,1);
 	color:#eee;
 }
 .btn {
-	background-color: #088D88;
-	color:#ffffff;
+
   display: inline-block;
-  padding: 4px 4px;
-  margin-bottom: 0;
   font-size: 14px;
   font-weight: normal;
   line-height: 1.42857143;
-  text-align: center;
-  vertical-align: middle;
-  -ms-touch-action: manipulation;
-      touch-action: manipulation;
-  cursor: pointer;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  border-radius: 5px;
-  
 }
-
-.btn:hover {
-
-  color: #fff;
-  text-decoration: none;
-  background-color: #0ABAB6;
-  transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -webkit-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-}
-
-
 
 .thumbnail {
   display: block;
@@ -839,16 +812,7 @@ nav#filter a {
 	margin-bottom:30px;
 }
 
-button.btn-default {
-	margin-top:10px;
-	margin-bottom:30px;
-	background-color:#fff;
-	color:#333;
-}
-button.btn-default:hover {
-	background-color:#ED502E;
-	color:#fff;
-}
+
 textarea.form-control {
 	border-radius:0;
 

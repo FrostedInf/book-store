@@ -1,5 +1,5 @@
 from wtforms import Form
-from wtforms import StringField, PasswordField
+from wtforms import StringField, PasswordField, IntegerField, FloatField
 from wtforms import validators
 from models import User
 from wtforms.fields.html5 import EmailField
@@ -22,6 +22,15 @@ class UserFormRegister(Form):
         user = User.query.filter_by(username = username).first()
         if user is not None:
             raise validators.ValidationError('El usuario ya se encuentra registrado')
+    
+class BookFormRegister(Form):
+    """docstring for BookFormRegister"""
+    titulo =  StringField('titulo', [validators.DataRequired()])
+    editorial = StringField('Editorial', [validators.DataRequired()])
+    numeroPaginas = IntegerField('numero', [validators.DataRequired()])
+    precio = FloatField('precio', [validators.DataRequired()])
+    genero = StringField('genero', [validators.DataRequired()])
+    autor = StringField('autor', [validators.DataRequired()])
 
 class busquedaForm(Form):
     busqueda = StringField('busqueda')

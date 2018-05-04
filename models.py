@@ -1,4 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash
+from werkzeug.security import check_password_hash
 import datetime
 
 db = SQLAlchemy()
@@ -11,20 +13,23 @@ class User(db.Model):
     compra = db.relationship('Compra')
     librocliente = db.relationship('LibroCliente')
     email = db.Column(db.String(40))
-    password = db.Column(db.String(66))
+    password = db.Column(db.String(100))
     created_date = db.Column(db.DateTime, default = datetime.datetime.now)
 
     def __init__(self, username, email, password):
         self.username = username
         self.email = email
-        self.password = password
+        self.password = self.__create_password(password)
+
+    def __create_password(self, password):
+        return generate_password_hash(password)
 
     def verify_password(self, password):
-        return self.password == password
+        return check_password_hash(self.password, password)
 
 class Books(db.Model):
     __tablename__= 'libros'
-    ISBN = db.Column(db.String(30), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     titulo = db.Column(db.String(50))
     vecesVendido = db.Column(db.Integer)
     numeroPaginas = db.Column(db.Integer)
@@ -37,6 +42,15 @@ class Books(db.Model):
     autor = db.Column(db.String(50))
     portada = db.Column(db.Text)
     libroCliente_id = db.relationship('LibroCliente')
+
+    def __init__(self, titulo, editorial,numeroPaginas, genero, autor, precio):
+        self.titulo = titulo
+        self.editorial = editorial
+        self.numeroPaginas = numeroPaginas
+        self.genero = genero
+        self.autor = autor
+        self.precio = precio
+        
 
 class Compra(db.Model):
     __tablename__= 'compra'
@@ -51,7 +65,7 @@ class LibroCliente(db.Model):
         __tablename__ = 'libroCliente'
         id = db.Column(db.Integer, primary_key=True)
         id_compra = db.Column(db.Integer, db.ForeignKey('compra.id'))
-        id_libro = db.Column(db.String(30), db.ForeignKey('libros.ISBN'))
+        id_libro = db.Column(db.Integer, db.ForeignKey('libros.id'))
         id_usuario = db.Column(db.Integer, db.ForeignKey('users.id'))
         cantidad = db.Column(db.Float)
 

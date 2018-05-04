@@ -106,7 +106,46 @@ def logout():
 # Admin Controllers
 @app.route('/admin', methods = ['GET', 'POST'])
 def admin():
-    return render_template('admin_views/admin_home.html', conectado = g.conectado)
+    return render_template('admin_views/admin_home.html',
+    conectado = g.conectado, usuarios = User.query.all(), libros = Books.query.all()  )
+
+@app.route('/admin/delete_users/<int:identificador>', methods = ['GET','POST'])
+def deleteUsers(identificador='nada'):
+    user = User.query.filter_by(id = identificador).first()
+    db.session.delete(user)
+    db.session.commit()
+    return redirect(url_for('admin'))
+
+@app.route('/admin/show_users/<int:identificador>', methods = ['GET','POST'])
+def showUsers(identificador='nada'):
+    user = User.query.filter_by(id = identificador).first()
+    return render_template('admin_views/view_user.html', usuario = user)
+
+@app.route('/admin/create', methods = ['GET','POST'])
+def createBooks():
+    form = forms.BookFormRegister(request.form)
+    if request.method == 'POST' and form.validate():
+        book = Books( 
+        form.titulo.data,
+        form.editorial.data,
+        form.numeroPaginas.data,
+        form.genero.data,
+        form.autor.data,
+        form.precio.data
+        )
+        db.session.add(book)
+        db.session.commit()
+        return redirect(url_for('admin'))
+
+@app.route('/admin/delete_books/<int:identificador>', methods = ['GET','POST'])
+def deleteBooks(identificador='nada'):
+    book = Books.query.filter_by(id = identificador).first()
+    db.session.delete(book)
+    db.session.commit()
+    return redirect(url_for('admin'))
+
+
+    return render_template('admin_views/view_create_books.html', form = form)
 
 if __name__ == '__main__':
     csrf.init_app(app)
