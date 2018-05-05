@@ -1,55 +1,6 @@
+{% extends 'plantillas/busquedaPlantilla.html' %}
 {% from 'plantillas/_macroForms.html' import render_fields %}
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1.0">
-	<title>Tienda</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-
-    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='css/font-awesome.min.css')}}">
-	<link rel="stylesheet" href="{{url_for('static', filename='css/jquery.bxslider.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/isotope.css')}}" media="screen" />
-	<link rel="stylesheet" href="{{url_for('static', filename='css/animate.css')}}">
-	<link rel="stylesheet" href="{{url_for('static', filename='js/fancybox/jquery.fancybox.css')}}" type="text/css" media="screen" />
-	<link href="{{url_for('static', filename='css/style.css')}}" rel="stylesheet">
-
-
-    <nav class="navbar navbar-default navbar-static-top" role="navigation">
-        <div class="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse.collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <div class="navbar-brand" href="#">
-                        <img src="{{url_for('static', filename='img/nav_bar_logo/book4.png')}}" alt="Brand">
-                    </div>
-                </div>
-
-                <div class="navbar-collapse collapse">
-                    <div class="menu">
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li  role="presentation"><a href="/" class="active">Inicio</a></li>
-                            <li role="presentation"><a href="/carrito">Mi Carrito</a></li>
-                            <li role="presentation"><a href="/contact">Contacto</a></li>
-                            <li role="presentation"><a href="/busqueda">Tienda</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-</head>
-<body>
+{% block content %}
 <form method="POST">
     <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
 <div class="input-group col-xs-9 form-horizontal" style="left: 17%">
@@ -84,5 +35,4 @@
 </div>
 {% endfor %}
 </div>
-</body>
-</html>
+{% endblock %}
