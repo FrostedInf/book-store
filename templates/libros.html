@@ -62,14 +62,21 @@
 </div>
 </form>
 <br>
-<div class="well" style="position: absolute;width: 100%;top: 35%;height: 100%">
+<div class="well" style="position: absolute;width: 100%;top: 35%;height: 107%">
 {% for libro in resultado %}
 <div class="well" style="width: 85%;height: 58%">
   <img src={{libro.portada}} alt="name" style="width: 29%;height: 96%;float: left">
   <h3 style="text-align: center;left: 45%;top: 50%">{{libro.titulo}}</h3>
-  <br>
   <h3 style="text-align: center;font-style: italic">Autor: {{libro.autor}}</h3>
   <h3 style="text-align:center;font-style: italic">${{libro.precio}}</h3>
+  &emsp;<p style="text-align: center;"><button class="btn btn-info" style="width: 71%" data-toggle="collapse" data-target=#{{libro.id}}>Detalles</button></p>
+  <div id={{libro.id}} class="collapse">
+      <h4>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Ventas: {{libro.vecesVendido}}&emsp;&emsp;Páginas: {{libro.numeroPaginas}}</h4>
+      <h4>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Libros disponibles: {{libro.existencia}}</h4>
+      <h4>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Genero: {{libro.genero}}&emsp;&emsp;Editorial: {{libro.editorial}}</h4>
+      <h4>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Fecha de publicación: {{libro.fechaPublicacion}}</h4>
+      <h4>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Descripcion: {{libro.descripcion}}</h4>
+  </div>
   <p></p>
 </div>
 {% endfor %}
