@@ -14,6 +14,16 @@ class User(db.Model):
     librocliente = db.relationship('LibroCliente')
     email = db.Column(db.String(40))
     password = db.Column(db.String(100))
+    numTarjeta = db.Column(db.String(40))
+    titular = db.Column(db.String(40))
+    fechaVencimiento = db.Column(db.Date)
+    cvc = db.Column(db.String(40))
+    pais = db.Column(db.String(40))
+    direccion = db.Column(db.String(40))
+    cp = db.Column(db.String(40))
+    ciudad = db.Column(db.String(40))
+    estado = db.Column(db.String(40))
+    telefono = db.Column(db.String(40))
     created_date = db.Column(db.DateTime, default = datetime.datetime.now)
 
     def __init__(self, username, email, password):
@@ -35,6 +45,7 @@ class Books(db.Model):
     numeroPaginas = db.Column(db.Integer)
     existencia = db.Column(db.Integer)
     genero = db.Column(db.String(50))
+    tipo = db.Column(db.String(50))
     descripcion = db.Column(db.Text)
     editorial = db.Column(db.String(50))
     fechaPublicacion = db.Column(db.Date)
@@ -57,6 +68,7 @@ class Compra(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     RFC = db.Column(db.String(50), primary_key=True)
     monto = db.Column(db.Float)
+    envio_id = db.Column(db.Integer, db.ForeignKey('envio.id')) 
     users_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     libroCliente_id = db.relationship('LibroCliente')
     created_date_compra = db.Column(db.DateTime, default = datetime.datetime.now)
@@ -74,3 +86,14 @@ class Administrador(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), unique=True)
     password = db.Column(db.String(66))
+
+class Envio(db.Model):
+    __tablename__ = 'envio'
+    id = db.Column(db.Integer, primary_key=True)
+    pais = db.Column(db.String(40))
+    colonia = db.Column(db.String(40))
+    direccion = db.Column(db.String(40))
+    cp = db.Column(db.String(40))
+    ciudad = db.Column(db.String(40))
+    estado = db.Column(db.String(40))
+    telefono = db.Column(db.String(40))
