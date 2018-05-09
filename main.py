@@ -114,7 +114,7 @@ def admin():
     return render_template('admin_views/admin_home.html',
     conectado = g.conectado, usuarios = User.query.all(), libros = Books.query.all()  )
 
-@app.route('/admin/delete_users/<int:identificador>', methods = ['GET','POST'])
+@app.route('/admin/delete_users/<int:identificador>', methods = ['POST'])
 def deleteUsers(identificador='nada'):
     user = User.query.filter_by(id = identificador).first()
     db.session.delete(user)
@@ -141,14 +141,15 @@ def createBooks():
         db.session.add(book)
         db.session.commit()
         return redirect(url_for('admin'))
+    return render_template('admin_views/view_create_books.html', form = form)
 
-@app.route('/admin/delete_books/<int:identificador>', methods = ['GET','POST'])
-def deleteBooks(identificador='nada'):
-    book = Books.query.filter_by(id = identificador).first()
-    db.session.delete(book)
-    db.session.commit()
-    return redirect(url_for('admin'))
-
+@app.route('/admin/delete_books/<int:identificador>', methods = ['POST'])
+def deleteBooks(identificador):
+    if request.method == 'POST':    
+        book = Books.query.filter_by(id = identificador).first()
+        db.session.delete(book)
+        db.session.commit()
+        return redirect(url_for('admin'))
 
     return render_template('admin_views/view_create_books.html', form = form)
 

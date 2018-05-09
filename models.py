@@ -68,9 +68,9 @@ class Compra(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     RFC = db.Column(db.String(50), primary_key=True)
     monto = db.Column(db.Float)
-    envio_id = db.Column(db.Integer, db.ForeignKey('envio.id')) 
     users_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     libroCliente_id = db.relationship('LibroCliente')
+    envio_id = db.relationship('Envio')
     created_date_compra = db.Column(db.DateTime, default = datetime.datetime.now)
 
 class LibroCliente(db.Model):
@@ -97,3 +97,4 @@ class Envio(db.Model):
     ciudad = db.Column(db.String(40))
     estado = db.Column(db.String(40))
     telefono = db.Column(db.String(40))
+    compra_id = db.Column(db.Integer, db.ForeignKey('compra.id')) 

@@ -4,7 +4,7 @@
 				<div class="container-fluid">
 						<a href="#menu-toggle" class="btn btn-success" id="menu-toggle">Toggle Menu</a>
 						<div class="table-responsive">
-						<table class="table table-bordered">
+						<table class="table table-bordered" id="tablaUsuarios">
 							<thead>
 								<tr>
 									<th>username</th>
@@ -14,11 +14,12 @@
 							</thead>
 							<tbody>
 								{% for usuario in usuarios %}
-									<tr>
+									<tr data-usuario="{{usuario.id}}" >
 										<td>{{usuario.username}}</td>
 										<td>{{usuario.email}}</td>
 										<td>
-											<button class="btn" ><a href="admin/delete_users/{{usuario.id}}">eliminar</a></button>
+											<input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+											<button class="btn"value="deleteUser">Eliminar</button>
 											<button class="btn" ><a href="admin/show_users/{{usuario.id}}">Ver</a></button>
 										</td>
 									</tr>
@@ -26,13 +27,15 @@
 							</tbody>
 						</table>
 						</div>
+
 						<div class="col-md-12">
 							<h3>Libros</h3>
 						</div>
 						<div class="col-md-12 text-right">
 							<button class="btn btn-md"><a href="admin/create">Nuevo</a></button>
 						</div>
-						<table class="table table-bordered">
+
+						<table class="table table-bordered" id="tablaLibros">
 						<thead>
 							<tr>
 								<th>Titulo</th>
@@ -43,12 +46,13 @@
 						</thead>
 						<tbody>
 						{% for libro in libros %}
-									<tr>
+									<tr data-book="{{libro.id}}">
 										<td>{{libro.titulo}}</td>
 										<td>{{libro.editorial}}</td>
 										<td>{{libro.precio}}</td>
 										<td class="text-center">
-											<button class="btn" ><a href="admin/delete_books/{{libro.id}}">eliminar</a></button>
+											<input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+											<button class="btn" value="deleteBook" >Eliminar</button>	
 											<button class="btn" ><a href="admin/show/{{libro.id}}">Ver</a></button>
 											<button class="btn" ><a href="admin/show/{{libro.id}}">editar</a></button>
 										</td>
