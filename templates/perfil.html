@@ -39,16 +39,25 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>ID PRODUCTO</th>
-                            <th> FECHA</th>
-                            <th> NO. ARTICULOS</th>
+                            <th></th>
+                            <th>monto</th>
+                            <th>fecha</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
+                        {% for compra in compras %}
+                        <tr class="active">
+                            <th><th>
+                            <th>{{compra.monto}}</th>
+                            <th>{{compra.created_date_compra}}</th>
+                            <th></th>
+                        </tr>
+                        {% endfor %}
+                        <!--
                         <tr class="active">
                             <th scope="row">1</th>
-                            <td></td>
+                            <th>minecra</th>
                             <td></td>
                             <td></td>
                         </tr>
@@ -101,6 +110,7 @@
                             <td></td>
                             <td></td>
                         </tr>
+                        -->
                     </tbody>
                 </table>
             </div>

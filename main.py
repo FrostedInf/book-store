@@ -10,6 +10,7 @@ from flask import g
 from models import db
 from models import User
 from models import Books
+from models import Compra
 from flask_wtf import CSRFProtect
 from config import DevelomentConfig
 import forms
@@ -80,7 +81,11 @@ def carrito():
 
 @app.route("/perfil")
 def perfil():
-    return render_template('perfil.html', conectado = g.conectado)
+    us1=session['username']
+    us2=User.query.filter_by(username=us1).first()
+    us=us2.id
+    compras = Compra.query.filter_by(users_id=us).all()
+    return render_template('perfil.html', conectado = g.conectado,compras=compras)
 
 @app.route('/login', methods = ['GET', 'POST'] )
 def login():
