@@ -1,0 +1,27 @@
+{% extends "plantillas/adminLayout.html" %}
+{% block content %}
+<div class="container">
+
+<div id="page-content-wrapper">
+        <div class="container-fluid">
+            <h3>Datos del libro</h3>
+            <div>
+              <img src="{{url_for('static', filename=libro.portada)}}">
+            </div>
+            <div class="col-md-12">
+            <ul class="list-group">            
+              <li class="list-group-item">Nombre del usuario: {{libro.titulo}}</li>
+              <li class="list-group-item">Correo del usuario: {{libro.editorial}}</li>
+              <li class="list-group-item">Correo del usuario: {{libro.numeroPaginas}}</li>
+              <li class="list-group-item">Correo del usuario: {{libro.autor}}</li>
+              <li class="list-group-item">Correo del usuario: {{libro.precio}}</li>
+            </ul>
+            </div>
+        </div>
+        <div class="col-md-12">
+          <a href="/admin">Regresa</a>
+        </div>
+</div>
+  
+</div>
+{% endblock  %}

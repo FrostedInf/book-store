@@ -51,17 +51,17 @@ class Books(db.Model):
     fechaPublicacion = db.Column(db.Date)
     precio = db.Column(db.Float)
     autor = db.Column(db.String(50))
-    portada = db.Column(db.Text)
+    portada = db.Column(db.String(80))
     libroCliente_id = db.relationship('LibroCliente')
 
-    def __init__(self, titulo, editorial,numeroPaginas, genero, autor, precio):
+    def __init__(self, titulo, editorial,numeroPaginas, genero, autor, precio, portada):
         self.titulo = titulo
         self.editorial = editorial
         self.numeroPaginas = numeroPaginas
         self.genero = genero
         self.autor = autor
         self.precio = precio
-        
+        self.portada = portada
 
 class Compra(db.Model):
     __tablename__= 'compra'
@@ -80,6 +80,7 @@ class LibroCliente(db.Model):
         id_libro = db.Column(db.Integer, db.ForeignKey('libros.id'))
         id_usuario = db.Column(db.Integer, db.ForeignKey('users.id'))
         cantidad = db.Column(db.Float)
+        precio = db.Column(db.Float)
 
 class Administrador(db.Model):
     __tablename__ = 'administrador'
@@ -97,4 +98,4 @@ class Envio(db.Model):
     ciudad = db.Column(db.String(40))
     estado = db.Column(db.String(40))
     telefono = db.Column(db.String(40))
-    compra_id = db.Column(db.Integer, db.ForeignKey('compra.id')) 
+    compra_id = db.Column(db.Integer, db.ForeignKey('compra.id'))

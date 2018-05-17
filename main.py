@@ -11,12 +11,19 @@ from models import db
 from models import User
 from models import Books
 from models import Compra
+import os
+from werkzeug.utils import secure_filename
 from flask_wtf import CSRFProtect
+from werkzeug.datastructures import CombinedMultiDict
+from flask_wtf.file import FileField
 from config import DevelomentConfig
 import forms
 
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 app = Flask(__name__)
 app.config.from_object(DevelomentConfig)
+UPLOAD_FOLDER = app.config['UPLOAD_FOLDER']
+
 csrf = CSRFProtect(app)
 
 @app.errorhandler(404)
@@ -68,7 +75,7 @@ def busqueda():
         if len(resultado) > 0:
             return render_template('libros.html',resultado=resultado , form = form)
         else:
-            return render_template('busqueda0.html', form = form) 
+            return render_template('busqueda0.html', form = form)
     return render_template('busqueda.html', conectado = g.conectado, form = form,resultado=Books.query.all())
 
 @app.route("/tienda")
@@ -128,15 +135,21 @@ def showUsers(identificador='nada'):
 
 @app.route('/admin/create', methods = ['GET','POST'])
 def createBooks():
-    form = forms.BookFormRegister(request.form)
+    form = forms.BookFormRegister(CombinedMultiDict((request.files, request.form)))
     if request.method == 'POST' and form.validate():
-        book = Books( 
+        f = form.imagen.data
+        filename = secure_filename(f.filename)        
+        path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        otherpath = path.replace('static/','')
+        f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        book = Books(
         form.titulo.data,
         form.editorial.data,
         form.numeroPaginas.data,
         form.genero.data,
         form.autor.data,
-        form.precio.data
+        form.precio.data,
+        otherpath
         )
         db.session.add(book)
         db.session.commit()
@@ -145,13 +158,44 @@ def createBooks():
 
 @app.route('/admin/delete_books/<int:identificador>', methods = ['POST'])
 def deleteBooks(identificador):
-    if request.method == 'POST':    
+    if request.method == 'POST':
         book = Books.query.filter_by(id = identificador).first()
         db.session.delete(book)
         db.session.commit()
         return redirect(url_for('admin'))
 
     return render_template('admin_views/view_create_books.html', form = form)
+
+@app.route('/admin/show_book/<int:identificador>', methods = ['GET','POST'])
+def showBook(identificador='nada'):
+    book = Books.query.filter_by(id = identificador).first()
+    return render_template('admin_views/view_books.html', libro = book)
+
+@app.route('/admin/edit_book/<int:identificador>', methods = ['GET','POST'])
+def editBook(identificador='nada'):
+    book = Books.query.filter_by(id = identificador).first()
+    form = forms.BookFormRegister(request.form)
+    form.titulo.data = book.titulo
+    form.editorial.data = book.editorial
+    form.numeroPaginas.data = book.numeroPaginas
+    form.genero.data = book.genero
+    form.autor.data = book.autor
+    form.precio.data = book.precio
+
+    if request.method == 'POST' and form.validate():
+        form2 = forms.BookFormRegister(request.form)
+        book.titulo = form2.titulo.data
+        book.editorial = form2.editorial.data
+        book.numeroPaginas = form2.numeroPaginas.data
+        book.genero = form2.genero.data
+        book.autor = form2.autor.data
+        book.precio = form2.precio.data
+        db.session.commit()
+        return redirect(url_for('admin'))
+        
+
+    return render_template('admin_views/view_edit_books.html',form = form)
+
 
 if __name__ == '__main__':
     csrf.init_app(app)

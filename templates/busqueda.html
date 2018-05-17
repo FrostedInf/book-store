@@ -17,7 +17,7 @@
 <div class="well" style="position: absolute;width: 100%;height: 107%">
     {% for libro in resultado %}
 <div class="well" style="width: 85%;height: 58%">
-  <img src={{libro.portada}} alt="name" style="width: 29%;height: 96%;float: left">
+  <img src="{{url_for('static', filename=libro.portada)}}" alt="name" style="width: 29%;height: 96%;float: left">
   <h3>&emsp;&emsp;&emsp;&emsp;{{libro.titulo}}</h3>
   <div style="float: right;padding: 2%"></div>
   <button type="submit" class="btn btn-lg btn-warning" style="float: right;top: 10%">Agregar al carrito</button>

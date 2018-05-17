@@ -18,7 +18,7 @@ $(document).ready(function() {
 			})
 			.done(function() {
 				console.log("success");
-				location.reload();
+				$identificador.remove();
 			})
 			.fail(function() {
 				console.log("error");
@@ -40,7 +40,7 @@ $(document).ready(function() {
 			})
 			.done(function() {
 				console.log("success");
-				location.reload();
+				$identificador.remove();
 			})
 			.fail(function() {
 				console.log("error");
