@@ -35,3 +35,18 @@ class BookFormRegister(Form):
 
 class busquedaForm(Form):
     busqueda = StringField('busqueda')
+  
+class tarjetaForm(Form):
+    tarjeta = StringField()
+    titular = StringField()
+    fecha = StringField()
+    cvc = StringField()
+
+class envioForm(Form):
+    pais = StringField()
+    direccion = StringField() 
+    cp  = StringField()
+    ciudad = StringField() 
+    estado = StringField() 
+    telefono  = StringField()
+    

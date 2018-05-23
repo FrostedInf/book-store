@@ -86,13 +86,67 @@ def tienda():
 def carrito():
     return render_template('carrito.html', conectado = g.conectado)
 
-@app.route("/perfil")
+
+@app.route("/perfil", methods = ['GET', 'POST'])
 def perfil():
     us1=session['username']
+    print(us1)
+    form = forms.tarjetaForm(request.form) 
+    form1 = forms.envioForm(request.form)
     us2=User.query.filter_by(username=us1).first()
-    us=us2.id
-    compras = Compra.query.filter_by(users_id=us).all()
-    return render_template('perfil.html', conectado = g.conectado,compras=compras)
+    # cargar datos de formulario tarjeta
+    form.tarjeta.data = us2.numTarjeta
+    form.titular.data = us2.titular
+    form.fecha.data = us2.fechaVencimiento
+    form.cvc.data = us2.cvc     
+    # cargar datos de formulario envio
+    form1.pais.data = us2.pais
+    form1.direccion.data =us2.direccion
+    form1.cp.data =us2.cp
+    form1.ciudad.data =us2.ciudad
+    form1.estado.data =us2.estado
+    form1.telefono.data =us2.telefono
+
+    if request.method == 'POST' and form.validate():
+        form2 = forms.tarjetaForm(request.form)
+        us2.numTarjeta = form2.tarjeta.data
+        us2.titular = form2.titular.data
+        us2.fechaVencimiento = form2.fecha.data
+        us2.cvc = form2.cvc.data     
+        db.session.commit()
+        flash('Usuario registrado en la base de datos')
+
+
+    if request.method == 'POST' and form.validate():      
+        form3 = forms.envioForm(request.form)
+        us2.pais = form3.pais.data    
+        us2.direccion = form3.direccion.data
+        us2.cp = form3.cp.data
+        us2.ciudad = form3.ciudad.data
+        us2.estado = form3.estado.data
+        us2.telefono = form3.telefono.data
+        db.session.commit()
+        flash('DATOS CAMBIADOS EN LA BASE DE DATOS')
+
+    return render_template('perfil.html', conectado = g.conectado, form=form, form1=form1)
+
+
+@app.route('/admin/create', methods = ['GET','POST'])
+def createBooks():
+    form = forms.BookFormRegister(request.form)
+    if request.method == 'POST' and form.validate():
+        book = Books( 
+        form.titulo.data,
+        form.editorial.data,
+        form.numeroPaginas.data,
+        form.genero.data,
+        form.autor.data,
+        form.precio.data
+        )
+        db.session.add(book)
+        db.session.commit()
+        return redirect(url_for('admin'))
+
 
 @app.route('/login', methods = ['GET', 'POST'] )
 def login():
