@@ -3,7 +3,7 @@
 {% block content %}
 
 <form method="POST">
-    <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+    <input type="hidden" name="csrf_token" id="idtoken" value="{{csrf_token()}}">
 <div class="input-group col-xs-9 form-horizontal" style="left: 17%">
   {{render_fields(form.busqueda, class='form-control')}}
   <div class="input-group-btn">
@@ -17,11 +17,11 @@
 <br>
 <div class="well" style="position: absolute;width: 100%;height: 107%">
     {% for libro in resultado %}
-<div class="well" style="width: 85%;height: 58%">
+<div class="well padre" style="width: 85%;height: 58%" data-book={{libro.id}}>
   <img src={{libro.portada}} alt="name" style="width: 29%;height: 96%;float: left">
   <h3>&emsp;&emsp;&emsp;&emsp;{{libro.titulo}}</h3>
   <div style="float: right;padding: 2%"></div>
-  <button type="submit" class="btn btn-lg btn-warning" style="float: right;top: 10%">Agregar al carrito</button>
+  <button type="submit" class="btn btn-lg btn-warning btnGuardar" style="float: right;top: 10%">Agregar al carrito</button>
   <h3 style="font-style: italic;">&emsp;&emsp;&emsp;&emsp;Autor: {{libro.autor}}</h3>
   <h3 style="font-style: italic;">&emsp;&emsp;&emsp;&emsp;${{libro.precio}}</h3>
   &emsp;<p style="text-align: center;"><button class="btn btn-info" style="width: 71%" data-toggle="collapse" data-target=#{{libro.id}}>Detalles</button></p>

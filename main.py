@@ -11,6 +11,7 @@ from models import db
 from models import User
 from models import Books
 from models import Compra
+from models import Carrito
 import os
 from werkzeug.utils import secure_filename
 from flask_wtf import CSRFProtect
@@ -77,6 +78,21 @@ def busqueda():
         else:
             return render_template('busqueda0.html', form = form)
     return render_template('busqueda.html', conectado = g.conectado, form = form,resultado=Books.query.all())
+
+@app.route("/agregarCarrito" , methods=['POST'])
+def agregarCarrito():
+    if request.method == 'POST':
+        data=session['username']
+        print(data)
+        solicitud=request.get_json(force=True)
+        user = User.query.filter_by(username = data).first()
+        carrito = Carrito( user.id, solicitud[1]
+        )
+        db.session.add(carrito)
+        db.session.commit()
+        return redirect(url_for('busqueda'))
+
+
 
 @app.route("/tienda")
 def tienda():

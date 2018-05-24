@@ -11,6 +11,7 @@ class User(db.Model):
     username = db.Column(db.String(50), unique=True)
     imagen = db.Column(db.String(50))
     compra = db.relationship('Compra')
+    carrito = db.relationship('Carrito')
     email = db.Column(db.String(40))
     password = db.Column(db.String(100))
     numTarjeta = db.Column(db.String(40))
@@ -48,6 +49,7 @@ class Books(db.Model):
     numeroPaginas = db.Column(db.Integer)
     existencia = db.Column(db.Integer)
     genero = db.Column(db.String(50))
+    carrito = db.relationship('Carrito')
     tipo = db.Column(db.String(50))
     descripcion = db.Column(db.Text)
     editorial = db.Column(db.String(50))
@@ -110,3 +112,9 @@ class Envio(db.Model):
     estado = db.Column(db.String(40))
     telefono = db.Column(db.String(40))
     compra_id = db.Column(db.Integer, db.ForeignKey('compra.id'))
+
+class Carrito(db.Model):
+    __tablename__='carrito'
+    id = db.Column(db.Integer, primary_key=True)
+    usuario_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    producto_id = db.Column(db.Integer, db.ForeignKey('libros.id'))

@@ -18,6 +18,7 @@
 {% for libro in resultado %}
 <div class="well" style="width: 85%;height: 58%">
   <img src={{libro.portada}} alt="name" style="width: 29%;height: 96%;float: left">
+  <button type="submit" class="btn btn-lg btn-warning btnGuardar" style="float: right;top: 10%">Agregar al carrito</button>
   <h3 style="text-align: center;left: 45%;top: 50%">{{libro.titulo}}</h3>
   <h3 style="text-align: center;font-style: italic">Autor: {{libro.autor}}</h3>
   <h3 style="text-align:center;font-style: italic">${{libro.precio}}</h3>
