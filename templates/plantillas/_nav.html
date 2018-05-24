@@ -19,13 +19,14 @@
                         <ul class="nav nav-tabs" role="tablist">
                             <li  role="presentation"><a href="/" class="active">Inicio</a></li>
                             {% if conectado %}
-                            <li role="presentation"><a href="/carrito">Mi Carrito</a></li>
+                            
                             {% endif %}
+                            <li role="presentation"><a href="/carrito">Mi Carrito</a></li>
                             <li role="presentation"><a href="/contact">Contacto</a></li>
                             <li role="presentation"><a href="/busqueda">Tienda</a></li>
-                            {% if conectado %}
                             <li role="presentation"><a href="/perfil">Perfil</a></li>
-                            <li role="presentation"><a href="/libros_favoritos">Libros Favoritos</a></li>
+
+                            {% if conectado %}
                             <li role="presentation"><a href="/logout">Logout</a></li>
                             {% else %}
                             <li role="presentation"><a href="/login">Login</a></li>
