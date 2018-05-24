@@ -11,7 +11,6 @@ class User(db.Model):
     username = db.Column(db.String(50), unique=True)
     imagen = db.Column(db.String(50))
     compra = db.relationship('Compra')
-    librocliente = db.relationship('LibroCliente')
     email = db.Column(db.String(40))
     password = db.Column(db.String(100))
     numTarjeta = db.Column(db.String(40))
@@ -36,6 +35,10 @@ class User(db.Model):
 
     def verify_password(self, password):
         return check_password_hash(self.password, password)
+    
+    def toJSON(self):
+        return {'User':{ 'username': self.username,
+            'email': self.email}}
 
 class Books(db.Model):
     __tablename__= 'libros'
@@ -63,6 +66,15 @@ class Books(db.Model):
         self.precio = precio
         self.portada = portada
 
+    def toJSON(self):
+        return {'Book':{ 'titulo': self.titulo,
+            'editorial': self.editorial,
+            'numeroPaginas': self.numeroPaginas,
+            'genero': self.genero,
+            'autor': self.autor,
+            'precio': self.precio,
+            'portada': self.portada}}
+
 class Compra(db.Model):
     __tablename__= 'compra'
     id = db.Column(db.Integer, primary_key=True)
@@ -78,7 +90,6 @@ class LibroCliente(db.Model):
         id = db.Column(db.Integer, primary_key=True)
         id_compra = db.Column(db.Integer, db.ForeignKey('compra.id'))
         id_libro = db.Column(db.Integer, db.ForeignKey('libros.id'))
-        id_usuario = db.Column(db.Integer, db.ForeignKey('users.id'))
         cantidad = db.Column(db.Float)
         precio = db.Column(db.Float)
 

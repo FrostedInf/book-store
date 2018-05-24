@@ -1,7 +1,8 @@
 {% extends 'plantillas/perfilPlantilla.html' %}
-    {% block content %}
-<br>
-<div class="col-md-12">
+{% from 'plantillas/_macroForms.html' import render_fields %}
+{% block content %}
+
+<div class="container-fluid">
     <div class="col-md-4">
         <div class="portlet light profile-sidebar-portlet bordered">
             <div class="profile-userpic">
@@ -27,7 +28,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-8 col-xs-12">
         <div class="portlet light bordered">
             <div class="portlet-title tabbable-line">
                 <div class="caption caption-md">
@@ -54,67 +55,81 @@
                             <th></th>
                         </tr>
                         {% endfor %}
-                        <!--
-                        <tr class="active">
-                            <th scope="row">1</th>
-                            <th>minecra</th>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr class="success">
-                            <th scope="row">3</th>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">4</th>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-
-                        <tr>
-                            <th scope="row">5</th>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr class="warning">
-                            <th scope="row">6</th>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">7</th>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr class="danger">
-                            <th scope="row">8</th>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr class="danger">
-                            <th scope="row">9</th>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        -->
                     </tbody>
                 </table>
             </div>
         </div>
+        <div>
+            <button class="btn col-md-12" data-toggle="collapse" data-target="#BtnTarjeta" style="" >
+            Mis informacion
+            </button>            
+        </div>
+        <div id="BtnTarjeta" class="collapse">
+            <div class="well">
+                <form method="POST">
+                    <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+                        <div><h4>Tarjeta</h4></div>
+                        <div>
+                        {{render_fields(form.tarjeta, placeholder=" xxxx-xxxx-xxxx-xxxx", class="form-control"  )}}   
+                        </div>       
+                        <div>
+                        {{render_fields(form.titular, placeholder="zzzzzz", class="form-control" )}}
+                        </div>
+                        <div>
+                        {{render_fields(form.fecha, placeholder=" dd/mm/aaaa ", class="form-control" )}}
+                        </div>
+                        <div>
+                        {{render_fields(form.cvc, placeholder=" 123 ", class="form-control" )}}
+                        </div>
+                        <div><h4>mis datos de envio</h4></div>
+                        <div>
+                        {{render_fields(form1.pais, placeholder="Nombre del pais", class="form-control" )}}
+                        </div>
+                        <div>
+                        {{render_fields(form1.direccion, placeholder="Ejemplo: clavijo", class="form-control" )}}
+                        </div>
+                        <div >
+                        {{render_fields(form1.cp, placeholder="ejemplo:#91000", class="form-control" )}}
+                        </div>
+                        <div>
+                        {{render_fields(form1.estado, placeholder="ejemplo: veracruz", class="form-control" )}}
+                        </div>
+                        <div>
+                        {{render_fields(form1.telefono, placeholder="(044)22 88 48 43 35", class="form-control" )}}
+                        </div>
+                 
+                    <!-- Trigger the modal with a button -->
+                        <div class="text-center" style="margin-top: 3%">
+                            <button type="submit" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalTarjeta" >
+                            Guardar cambios
+                        </button>
+                        </div>
+                </form>   
+            </div>
+        </div>
+        <div>
+            
+        </div>
+        
     </div>
-  </div>
+</div>
+
+    <div id="myModalTarjeta" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Tarjeta</h4>
+          </div>
+          <div class="modal-body">
+            <p>los datos de la tarjeta se guardaron con exito.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
      {% endblock %}
