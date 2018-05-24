@@ -36,7 +36,7 @@ def before_ver():
         g.conectado = False
         if 'username' in session:
             g.conectado = True
-        if 'username' not in session and request.endpoint in ['perfil', 'carrito', 'tienda', 'favouriteBooks']:
+        if 'username' not in session and request.endpoint in ['perfil', 'carrito', 'tienda', 'favouriteBooks', 'tienda']:
             return redirect(url_for('login'))
 
 @app.after_request
@@ -81,16 +81,16 @@ def busqueda():
 
 @app.route("/agregarCarrito" , methods=['POST'])
 def agregarCarrito():
+    username = session['username']
     if request.method == 'POST':
-        data=session['username']
-        print(data)
+        print(username)
         solicitud=request.get_json(force=True)
-        user = User.query.filter_by(username = data).first()
-        carrito = Carrito( user.id, solicitud[1]
+        user = User.query.filter_by(username = username).first()
+        carrito = Carrito( user.id, solicitud['idLibro']
         )
         db.session.add(carrito)
         db.session.commit()
-        return redirect(url_for('busqueda'))
+        return request.method
 
 
 
@@ -179,7 +179,7 @@ def admin():
     conectado = g.conectado, usuarios = User.query.all(), libros = Books.query.all()  )
 
 @app.route('/admin/delete_users/<int:identificador>', methods = ['POST'])
-def deleteUsers(identificador='nada'):
+def deleteUsers(identificador):
     user = User.query.filter_by(id = identificador).first()
     db.session.delete(user)
     db.session.commit()

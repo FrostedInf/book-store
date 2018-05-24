@@ -118,3 +118,7 @@ class Carrito(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     usuario_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     producto_id = db.Column(db.Integer, db.ForeignKey('libros.id'))
+
+    def __init__(self, usuario_id, producto_id):
+        self.usuario_id = usuario_id
+        self.producto_id = producto_id
