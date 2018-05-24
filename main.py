@@ -196,6 +196,7 @@ def createBooks():
         return redirect(url_for('admin'))
     return render_template('admin_views/view_create_books.html', form = form)
 
+
 @app.route('/admin/delete_books/<int:identificador>', methods = ['POST'])
 def deleteBooks(identificador):
     if request.method == 'POST':
