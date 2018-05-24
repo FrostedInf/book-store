@@ -127,7 +127,9 @@ def perfil():
         db.session.commit()
         flash('DATOS CAMBIADOS EN LA BASE DE DATOS')
 
-    return render_template('perfil.html', conectado = g.conectado, form=form, form1=form1)
+
+    return render_template('perfil.html', conectado = g.conectado, form=form, form1=form1, us2=us2)
+
 
 @app.route('/login', methods = ['GET', 'POST'] )
 def login():

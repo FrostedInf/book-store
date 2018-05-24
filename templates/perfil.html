@@ -10,13 +10,10 @@
               </div>
             <div class="profile-usertitle">
               <br></br>
-                <div class="center-block" class="profile-usertitle-name"> Juanito Lopez </div>
+                <div class="center-block" class="profile-usertitle-name"> <h4>{{us2.username}}</h4> </div>
                 <div class="profile-usertitle-job">. Tienda </div>
             </div>
-            <div class="profile-userbuttons" class="portfolio-desc align-center">
-              <button type="button" class="btn btn-primary btn-sm">Editar</button>
-            </div>
-            <div class="profile-usermenu" >
+                     <div class="profile-usermenu" >
                 <ul class="nav">
                     <li class="active">
                         <a href="#"> <i class="icon-home"></i> Historial de compra </a>
@@ -61,29 +58,29 @@
         </div>
         <div>
             <button class="btn col-md-12" data-toggle="collapse" data-target="#BtnTarjeta" style="" >
-            Mis informacion
-            </button>            
+            Mi información
+            </button>           
         </div>
         <div id="BtnTarjeta" class="collapse">
             <div class="well">
                 <form method="POST">
                     <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
-                        <div><h4>Tarjeta</h4></div>
+                        <div><h4>Mi Tarjeta</h4></div>
                         <div>
                         {{render_fields(form.tarjeta, placeholder=" xxxx-xxxx-xxxx-xxxx", class="form-control"  )}}   
                         </div>       
                         <div>
-                        {{render_fields(form.titular, placeholder="zzzzzz", class="form-control" )}}
+                        {{render_fields(form.titular, placeholder="ejemplo:Fernando Roberto Torres Esquivel", class="form-control" )}}
                         </div>
                         <div>
-                        {{render_fields(form.fecha, placeholder=" dd/mm/aaaa ", class="form-control" )}}
+                        {{render_fields(form.fecha, placeholder=" aaaa/mm/dd ", class="form-control" )}}
                         </div>
                         <div>
                         {{render_fields(form.cvc, placeholder=" 123 ", class="form-control" )}}
                         </div>
                         <div><h4>mis datos de envio</h4></div>
                         <div>
-                        {{render_fields(form1.pais, placeholder="Nombre del pais", class="form-control" )}}
+                        {{render_fields(form1.pais, placeholder="Nombre: del país", class="form-control" )}}
                         </div>
                         <div>
                         {{render_fields(form1.direccion, placeholder="Ejemplo: clavijo", class="form-control" )}}
