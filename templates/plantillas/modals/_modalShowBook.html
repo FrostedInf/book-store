@@ -1,0 +1,36 @@
+{% macro modalShowBook() %}
+<div class="modal fade" id="showModalBook" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Eliminar</h4>
+            </div>
+            <div class="modal-body">
+                <ul>
+                    <div class="container-fluid">
+          <h3>Datos del libro</h3>
+          <div>
+            <img src="">
+          </div>
+          <div class="col-md-12">
+          <ul class="list-group">
+                            <img  id="portada" src="" alt="" width="200px">
+            <li class="list-group-item" id="titulo"></li>
+            <li class="list-group-item" id="editorial"></li>
+            <li class="list-group-item" id="numeroPaginas"></li>
+            <li class="list-group-item" id="autor"></li>
+            <li class="list-group-item" id="precio"></li>
+          </ul>
+          </div>
+      </div>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button id="confirmar" type="button" class="btn btn-default" >confirmar</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{%  endmacro %}

@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask,json
 from flask import render_template
 from flask import make_response
 from flask import request
@@ -35,7 +35,7 @@ def before_ver():
         g.conectado = False
         if 'username' in session:
             g.conectado = True
-        if 'username' not in session and request.endpoint in ['perfil', 'carrito', 'tienda']:
+        if 'username' not in session and request.endpoint in ['perfil', 'carrito', 'tienda', 'favouriteBooks']:
             return redirect(url_for('login'))
 
 @app.after_request
@@ -86,7 +86,6 @@ def tienda():
 def carrito():
     return render_template('carrito.html', conectado = g.conectado)
 
-
 @app.route("/perfil", methods = ['GET', 'POST'])
 def perfil():
     us1=session['username']
@@ -130,24 +129,6 @@ def perfil():
 
     return render_template('perfil.html', conectado = g.conectado, form=form, form1=form1)
 
-
-@app.route('/admin/create', methods = ['GET','POST'])
-def createBooks():
-    form = forms.BookFormRegister(request.form)
-    if request.method == 'POST' and form.validate():
-        book = Books( 
-        form.titulo.data,
-        form.editorial.data,
-        form.numeroPaginas.data,
-        form.genero.data,
-        form.autor.data,
-        form.precio.data
-        )
-        db.session.add(book)
-        db.session.commit()
-        return redirect(url_for('admin'))
-
-
 @app.route('/login', methods = ['GET', 'POST'] )
 def login():
     login_form = forms.LoginForm(request.form)
@@ -169,6 +150,10 @@ def logout():
     if 'username' in session:
         session.pop('username')
     return redirect(url_for('login'))
+
+@app.route('/libros_favoritos', methods = ['GET', 'POST'])
+def favouriteBooks():
+    return render_template('librosFavoritos.html', conectado = g.conectado)
 # Admin Controllers
 @app.route('/admin', methods = ['GET', 'POST'])
 def admin():
@@ -182,17 +167,18 @@ def deleteUsers(identificador='nada'):
     db.session.commit()
     return redirect(url_for('admin'))
 
-@app.route('/admin/show_users/<int:identificador>', methods = ['GET','POST'])
-def showUsers(identificador='nada'):
+@app.route('/admin/show_users/<int:identificador>', methods = ['GET'])
+def showUsers(identificador):
     user = User.query.filter_by(id = identificador).first()
-    return render_template('admin_views/view_user.html', usuario = user)
+    jsonStr = json.dumps(user.toJSON())
+    return jsonStr
 
 @app.route('/admin/create', methods = ['GET','POST'])
 def createBooks():
     form = forms.BookFormRegister(CombinedMultiDict((request.files, request.form)))
     if request.method == 'POST' and form.validate():
         f = form.imagen.data
-        filename = secure_filename(f.filename)        
+        filename = secure_filename(f.filename)
         path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         otherpath = path.replace('static/','')
         f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
@@ -220,22 +206,24 @@ def deleteBooks(identificador):
 
     return render_template('admin_views/view_create_books.html', form = form)
 
-@app.route('/admin/show_book/<int:identificador>', methods = ['GET','POST'])
-def showBook(identificador='nada'):
+@app.route('/admin/show_book/<int:identificador>', methods = ['GET'])
+def showBook(identificador):
     book = Books.query.filter_by(id = identificador).first()
-    return render_template('admin_views/view_books.html', libro = book)
+    jsonStr = json.dumps(book.toJSON())
+    return jsonStr  
 
 @app.route('/admin/edit_book/<int:identificador>', methods = ['GET','POST'])
-def editBook(identificador='nada'):
+def editBook(identificador):
     book = Books.query.filter_by(id = identificador).first()
     form = forms.BookFormRegister(request.form)
+    #cargar los datos en el formulario
     form.titulo.data = book.titulo
     form.editorial.data = book.editorial
     form.numeroPaginas.data = book.numeroPaginas
     form.genero.data = book.genero
     form.autor.data = book.autor
     form.precio.data = book.precio
-
+    #Actuliza los datos en base
     if request.method == 'POST' and form.validate():
         form2 = forms.BookFormRegister(request.form)
         book.titulo = form2.titulo.data
@@ -246,8 +234,6 @@ def editBook(identificador='nada'):
         book.precio = form2.precio.data
         db.session.commit()
         return redirect(url_for('admin'))
-        
-
     return render_template('admin_views/view_edit_books.html',form = form)
 
 

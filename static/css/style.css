@@ -6,10 +6,10 @@
 @import url('overwrite.css');
 @import url('animate.css');
 
-html { 
+html {
 	position: relative;
 	min-height: 100%;
-	
+
  }
 
 body {
@@ -41,7 +41,7 @@ a {
 }
 a:hover {
   text-decoration: none;
-  color:#061524;	
+  color:#061524;
 }
 
 ul.social-network {
@@ -57,11 +57,11 @@ ul.social-network {
 
 ul.social-network li {
 	display:inline;
-	margin: 0 5px;	
+	margin: 0 5px;
 }
-ul.social-network li a {	
+ul.social-network li a {
 	color:#d0d0d0;
-	
+
 }
 .social-network li:hover .fa-twitter {
   color: #00abf0;
@@ -74,11 +74,11 @@ ul.social-network li a {
 }
 .social-network li:hover .fa-pinterest {
   color: #c9171e;
-  
+
 }
 .social-network li:hover .fa-linkedin {
   color: #0077b5;
-  
+
 }
 .info {
   float: left;
@@ -99,7 +99,7 @@ ul.social-network li a {
 
 .info a {
   color: #d0d0d0;
-  font-size: 12px; 
+  font-size: 12px;
 }
 
 .info a:hover {
@@ -127,7 +127,7 @@ General settings
 .greyStrongAndBold {
 
 	color: #747474;
-	font-weight: 700;	
+	font-weight: 700;
 }
 
 
@@ -135,13 +135,13 @@ General settings
   Carousel
 ============================ */
 
-.carousel { 
+.carousel {
 	padding: 0px;
-	margin-bottom:20px; 
+	margin-bottom:20px;
  }
 
 
-.carousel img { 
+.carousel img {
 	padding: 0px 0px 0px 0px;
 	margin: 0px 0px 0px 0px;
 	width: 100%;
@@ -153,7 +153,7 @@ General settings
  }
 
 
- .carousel  p { 
+ .carousel  p {
 	color: #fff;
 	font-size: 20px;
 
@@ -188,7 +188,7 @@ General settings
           user-select: none;
   border-radius: 5px;
 
- } 
+ }
 /*===========================
   Carousel indicators
 ============================ */
@@ -238,7 +238,7 @@ General settings
 .navigation  {
   background-color:#fff;
   padding:10px 10px 0px 0px;
-  
+
 
 }
 
@@ -258,7 +258,7 @@ General settings
 .menu {
 	font-size:20px;
 	font-weight:300;
-	
+
 
 }
 
@@ -279,23 +279,23 @@ General settings
 }
 .menu ul.nav-tabs {
 	padding-top:10px;
-	border:none;	 
+	border:none;
 }
 
 .nav-tabs {
   padding: 0;
 }
 .nav-tabs > li {
-  
+
 }
-.nav-tabs > li > a {	
+.nav-tabs > li > a {
 	line-height: 1;
 	color:#333;
 }
 
-.nav-tabs > li > a:hover {	
+.nav-tabs > li > a:hover {
   color: #0ABAB6;
-  background-color:#f9f9f9; 
+  background-color:#f9f9f9;
   transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -webkit-transition: all 0.3s ease-in-out;
@@ -303,7 +303,7 @@ General settings
 }
 .nav-tabs > li > a.active {
   color: #0ABAB6;
-  background-color:#f9f9f9; 
+  background-color:#f9f9f9;
   transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -webkit-transition: all 0.3s ease-in-out;
@@ -320,7 +320,7 @@ General settings
 	color:#000;
 	padding:70px;
 	margin-top:20px;
-	margin-bottom:20px;	
+	margin-bottom:20px;
 }
 .align-center  h4 {
 	padding:10px;
@@ -369,7 +369,7 @@ box-shadow: 1px 2px 2px 4px rgba(204,204,204,1);
 }
 .ic_certificacion{
 	padding: 0px;
-	margin-bottom: 5px; 
+	margin-bottom: 5px;
 }
 .thumbnail .ic_certificacion img {
 	width: 30px;
@@ -403,17 +403,17 @@ box-shadow: 1px 2px 2px 4px rgba(204,204,204,1);
 	width: 100%;
 }
 
-.box {	
+.box {
 	background-color:#fff;
 	padding-top:10px;
 	padding-bottom:60px;
 	margin: 0;
-	
+
 }
 
-.box h3 {	
+.box h3 {
 	 color: #088D88;
-	
+
 }
 
 .caption {
@@ -427,8 +427,8 @@ box-shadow: 1px 2px 2px 4px rgba(204,204,204,1);
 
 .jumbotron {
 	text-align:center;
-	margin-bottom:-5px;	
-	background-color:#fff;	
+	margin-bottom:-5px;
+	background-color:#fff;
 }
 .jumbotron p {
 	margin-top:30px;
@@ -457,32 +457,32 @@ box-shadow: 1px 2px 2px 4px rgba(204,204,204,1);
    padding: 50px;
    padding-bottom:70px;
    font-size:40px;
-  
+
 }
 /*===========================
   index
 ============================ */
 
 /* #### Seccion de Experta ###### */
-#experta { 
-	margin-top: 10px; 
+#experta {
+	margin-top: 10px;
 	padding: 50px 0px;
 
  }
 
- #experta h3 { 
+ #experta h3 {
 
 	color: #088D88;
 	font-weight: 550;
  }
 /* #### Seccion online Index###### */
-#online {	
+#online {
 	padding: 50px 0px;
 	background-color:#B0589F;
 	color: white;
 }
 
-#online h3 { 
+#online h3 {
 	color: white;
  }
 
@@ -494,120 +494,6 @@ box-shadow: 1px 2px 2px 4px rgba(204,204,204,1);
 
  	color: white;
  }
-/* #### Seccion de Certificaciones Index ###### */
-#certificaciones-index {	
-	padding-top:50px;
-	padding-bottom:50px;
-
-}
-
-#certificaciones-index h3 {
-
-	color: #088D88;
-}
-
-/* #### Seccion de testimoniales index ###### */
-
-#testimoniales {
-	padding-top:50px;
-	padding-bottom:50px;
-	background-color:#FDEFEF;	
-}
-
-#testimoniales h3 {
-
-	color: #088D88;
-}
-#testimoniales .testimonios {
-	background-color: #F8F8F8;
-	border-style: solid;
-	border-width: 10px;
-	border-color: #FDEFEF;
-}
-
-/*===========================
-  Nosotros
-============================ */
-#intro-nosotros h3 {
-
-	color: #088D88;
-}
-
-#galeria h3 {
-
-	color: #088D88;	
-
-}
-	
-/*===========================
-  certificacion
-============================ */
-
-#our-services {
-	padding-bottom: 10px;
-}
-
-#our-services h5 {
-	font-weight: 700;
-	margin: 0px 0px 5px 0px;
-}
-
-#our-services h3 {
-	margin: 5px 0px 20px 0px;
-
-}
-
-#our-services ul {
-
-	list-style: none;
-	padding: 20px 0px;
-}
-
-#our-services li {
-	color:#747474;
-}
-
-#our-services span {
-	margin-right: 10px;
-	color:#747474;
-}
-
-#aditional-material {	
-	padding-top:50px;
-	padding-bottom:50px;
-}
-
-#aditional-material li{
-	color:#747474;
-}
-
-#aditional-material li span{
-	color: black;
-}
-
-#aditional-material h3 {
-	color: #088D88;
-	padding-bottom: 20px;
-
-}
-
-
-#temario-certificacion {	
-	padding-top:50px;
-	padding-bottom:50px;
-	background-color:#A34F91;
-	color: #fff;
-}
-
-
-#temario-certificacion h3 {
-	padding-bottom: 20px;
-	color: #fff;	
-}
-
-#temario-certificacion li {
-	list-style-image: url(../img/icons/ic_temario.png); 
-}
 
 /*===========================
   Blog
@@ -628,25 +514,25 @@ box-shadow: 1px 2px 2px 4px rgba(204,204,204,1);
 	text-align:center;
 	margin-bottom:30px;
 	margin-top:20px;
-	
+
 }
 .blog .ficon a:hover {
 	color:#ED502E;
 }
 .recents {
 	margin-top:110px;
-	
+
 }
 .recent-post ul.recent {
 	list-style:none;
 	margin:0;
 	margin-left: 0;
 	padding-left:0;
-	
+
 }
 .recent-post ul.recent li {
 	margin:0 5px 15px 0;
-	
+
 }
 .recent-post ul.recent li a {
 	background:#eee;
@@ -710,7 +596,7 @@ nav#filter a:hover, nav#filter a.current {
 
 #portfolio img  {
 	width:100%;
-	
+
 }
 
 #portfolio article p {
@@ -731,7 +617,7 @@ nav#filter a {
 }
 
 
-.portfolio-items article img {width:100%;} 
+.portfolio-items article img {width:100%;}
 
 .portfolio-item {
 	display: block;
@@ -748,7 +634,7 @@ nav#filter a {
 	-ms-transition: all 300ms linear;
 	transition: all 300ms linear;
 	background: #fff;
-	opacity:0.5;	
+	opacity:0.5;
 }
 
 .portfolio-item .portfolio-desc {
@@ -775,7 +661,7 @@ nav#filter a {
 	text-decoration: none;
 }
 .portfolio-item .portfolio-desc .folio-info {
-	top:-20px;	
+	top:-20px;
 	padding: 30px;
 	height: 0;
     opacity: 0;
@@ -788,13 +674,12 @@ nav#filter a {
 	top:-10px;
 }
 
-
 .portfolio-item .portfolio-desc .folio-info h5 {
 	text-transform: uppercase;
-	
+
 }
 .portfolio-item .portfolio-desc .folio-info p {
-	
+
 	font-size: 12px;
 }
 /*===========================
@@ -814,7 +699,7 @@ textarea.form-control {
 /* --- Map --- */
 .map{
 	position:relative;
-	margin-top:18px;	
+	margin-top:18px;
 }
 
 .map iframe{
@@ -856,17 +741,17 @@ footer {
   font-weight: 100;
   margin-top: 0;
   margin-bottom: 40px;
-  
+
 }
 .f-about a h1 {
 	margin-top: 0;
 	margin-bottom: 40px;
 	color: #fff;
-	
+
 }
 .f-about a h1 span {
 	color: #ED502E;
-	
+
 }
 .f-about p {
   font-size: 14px;
@@ -894,7 +779,7 @@ footer {
   font-size: 14px;
   color: #8a8d94;
   margin: 0;
-  
+
   font-weight: 300;
   margin-bottom: 15px;
 }
@@ -975,7 +860,7 @@ a.scrollup{
 	text-decoration:none;
 	position:fixed;
 	bottom:20px;
-	right:40px;	
+	right:40px;
 	opacity:0,5;
 	border-radius:50%;
 	z-index:999;
@@ -983,21 +868,27 @@ a.scrollup{
 a.scrollup:hover{
 	opacity:1;
 	background-color:#ED502E;
-	color:#fff;;	
+	color:#fff;;
 }
-
-
-
+/* ========================================
+Especial rules
+========================================= */
+/* Center a grid from stackoverflow */
+.col-centered {
+  float: none;
+  margin-right: auto;
+  margin-left: auto;
+}
 /* ========================================
 Media queries
 ========================================= */
 /* Small devices (tablets, 768px and up) */
 
-@media (min-width: @screen-sm-min) { 
+@media (min-width: @screen-sm-min) {
 
 	.img-thumbnail img {
 		margin-right:30px;
-		
+
 	}
 
  }

@@ -1,8 +1,13 @@
 {% extends "plantillas/adminLayout.html" %}
+{% from 'plantillas/modals/_modalEliminar.html' import modalEliminar %}
+{% from 'plantillas/modals/_modalShowBook.html' import modalShowBook %}
 {% block content %}
+
 <div id="page-content-wrapper">
 				<div class="container-fluid">
-						<a href="#menu-toggle" class="btn btn-success" id="menu-toggle">Toggle Menu</a>
+						<a href="#menu-toggle" class="btn btn-success" id="menu-toggle" style="margin-bottom: 1%">
+							Toggle Menu
+						</a>
 						<div class="table-responsive">
 						<table class="table table-bordered" id="tablaUsuarios">
 							<thead>
@@ -19,22 +24,20 @@
 										<td>{{usuario.email}}</td>
 										<td>
 											<input type="hidden" name="csrf_token" value="{{csrf_token()}}">
-											<button class="btn"value="deleteUser">Eliminar</button>
-											<a href="admin/show_users/{{usuario.id}}" class="btn btn-primary">Ver</a>
+											<button class="btn"value="showUser">Ver</button>
+											<button class="btn btn-danger"value="deleteUser">Eliminar</button>
 										</td>
 									</tr>
 								{% endfor %}
 							</tbody>
 						</table>
 						</div>
-
 						<div class="col-md-12">
 							<h3>Libros</h3>
 						</div>
-						<div class="col-md-12 text-right">
+						<div class="col-md-12 text-right" style="margin-bottom: 1%">
 							<a class= "btn btn-primary btn-sm" href="admin/create">Nuevo</a>
 						</div>
-
 						<table class="table table-bordered" id="tablaLibros">
 						<thead>
 							<tr>
@@ -52,15 +55,39 @@
 										<td>{{libro.precio}}</td>
 										<td class="text-center">
 											<input type="hidden" name="csrf_token" value="{{csrf_token()}}">
-											<button class="btn" value="deleteBook" >Eliminar</button>
-											<a href="admin/show_book/{{libro.id}}" class="btn btn-primary">Ver</a>
-											<a href="admin/edit_book/{{libro.id}}" class="btn btn-default">editar</a>
+											<button class="btn" value="showBook" >Ver</button>
+											<button class="btn" value="editBook" >Editar</button>
+											<button class="btn btn-danger" value="deleteBook" >Eliminar</button>
 										</td>
 									</tr>
 								{% endfor %}
 						</tbody>
 					</table>
 				</div>
-</div>
+	</div>
 
+	{{modalEliminar()}}
+
+	{{modalShowBook()}}
+
+	<div class="modal fade" id="showModalUser" role="dialog">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Eliminar</h4>
+				</div>
+				<div class="modal-body">
+					<ul>
+						<li id="username"></li>
+						<li id="email"></li>
+					</ul>
+				</div>
+				<div class="modal-footer">
+					<button id="confirmar" type="button" class="btn btn-default" >confirmar</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock  %}

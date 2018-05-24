@@ -31,7 +31,7 @@ class BookFormRegister(Form):
     precio = FloatField('precio', [validators.DataRequired()])
     genero = StringField('genero', [validators.DataRequired()])
     autor = StringField('autor', [validators.DataRequired()])
-    portada = FileField()
+    imagen = FileField()
 
 class busquedaForm(Form):
     busqueda = StringField('busqueda')
