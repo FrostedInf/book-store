@@ -40,19 +40,15 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th></th>
                             <th>monto</th>
                             <th>fecha</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for compra in compras %}
                         <tr class="active">
-                            <th><th>
                             <th>{{compra.monto}}</th>
                             <th>{{compra.created_date_compra}}</th>
-                            <th></th>
                         </tr>
                         {% endfor %}
                     </tbody>

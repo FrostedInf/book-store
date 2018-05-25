@@ -80,12 +80,17 @@ class Books(db.Model):
 class Compra(db.Model):
     __tablename__= 'compra'
     id = db.Column(db.Integer, primary_key=True)
-    RFC = db.Column(db.String(50), primary_key=True)
+    RFC = db.Column(db.String(50))
     monto = db.Column(db.Float)
     users_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     libroCliente_id = db.relationship('LibroCliente')
     envio_id = db.relationship('Envio')
     created_date_compra = db.Column(db.DateTime, default = datetime.datetime.now)
+
+    def __init__(self, users_id, monto, RFC):
+        self.users_id = users_id
+        self.monto = monto
+        self.RFC = RFC
 
 class LibroCliente(db.Model):
         __tablename__ = 'libroCliente'
