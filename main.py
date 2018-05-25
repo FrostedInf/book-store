@@ -92,6 +92,13 @@ def agregarCarrito():
         db.session.commit()
         return request.method
 
+@app.route("/eliminarCarrito/<int:identificador>" , methods=['GET'])
+def eliminarCarrito(identificador):
+        carrito = Carrito.query.filter_by(id = identificador).first()
+        db.session.delete(carrito)
+        db.session.commit()
+        return redirect(url_for('carrito'))
+
 
 
 @app.route("/tienda", methods = ['GET'])
@@ -100,7 +107,8 @@ def tienda():
 
 @app.route("/carrito", methods = ['GET'])
 def carrito():
-    compra_list = Carrito.query.join(Books).add_columns(Books.id, Books.titulo, Books.portada, Books.precio)
+    user = session['username']
+    compra_list = Carrito.query.join(Books).add_columns(Carrito.id, Books.titulo, Books.portada, Books.precio)
     preciocart = Carrito.query.join(Books).add_columns(Books.id, Books.titulo, Books.portada, Books.precio)
     totalPrice = 0
     for preciocart in preciocart:

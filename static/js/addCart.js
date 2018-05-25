@@ -7,7 +7,15 @@ $(document).ready(function(){
 		$token=$("#idtoken").val();
 		agregarCarrito($identificador,$token);
 	})
+
+	$(".eliminarLibro").click(function(event){
+		$identificador=$(this).parent('div');
+		console.log($identificador);
+		$token=$("#idtoken").val();
+		eliminarCarrito($identificador,$token);
+	})
 });
+
 function agregarCarrito($identificador,$token){
 	var data = $identificador.attr('data-book');
 	console.log(data);
@@ -31,6 +39,28 @@ function agregarCarrito($identificador,$token){
 	.always(function() {
 		console.log("complete");
 	});
-	
-	
+}
+
+function eliminarCarrito($identificador,$token){
+	var data = $identificador.attr('data-book');
+	console.log(data);
+
+	$.ajax({
+		url: '/eliminarCarrito/' + data,
+		type: 'GET',
+		beforeSend: function(xhr){
+			xhr.setRequestHeader("X-CSRFToken",$token);
+		}
+	})
+	.done(function() {
+		console.log("success");
+		$identificador.remove();
+		location.href = '/carrito';
+	})
+	.fail(function() {
+		console.log("error");
+	})
+	.always(function() {
+		console.log("complete");
+	});
 }
