@@ -1,6 +1,6 @@
 
 {% from 'plantillas/_nav.html' import nav %}
-{% from 'plantillas/_footer.html' import footer %}
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -32,7 +32,7 @@
     {% block  content %}
     {% endblock %}
 
-    {{ footer() }}
+   
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="{{url_for('static', filename='js/jquery-2.1.1.min.js')}}"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

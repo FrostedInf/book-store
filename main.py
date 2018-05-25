@@ -113,10 +113,12 @@ def carrito():
 @app.route("/perfil", methods = ['GET', 'POST'])
 def perfil():
     us1=session['username']
+    
     print(us1)
     form = forms.tarjetaForm(request.form) 
     form1 = forms.envioForm(request.form)
     us2=User.query.filter_by(username=us1).first()
+    
     # cargar datos de formulario tarjeta
     form.tarjeta.data = us2.numTarjeta
     form.titular.data = us2.titular
