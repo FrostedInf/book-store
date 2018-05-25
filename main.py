@@ -94,13 +94,17 @@ def agregarCarrito():
 
 
 
-@app.route("/tienda")
+@app.route("/tienda", methods = ['GET'])
 def tienda():
     return render_template('tienda.html', conectado = g.conectado)
 
-@app.route("/carrito")
+@app.route("/carrito", methods = ['GET'])
 def carrito():
-    return render_template('carrito.html', conectado = g.conectado)
+    compra_list = Carrito.query.join(Books).add_columns(Books.id, Books.titulo, Books.portada, Books.precio)
+    totalPrice = 0
+    for libros in compra_list:
+        totalPrice += libros[1]
+    return render_template('carrito.html', totalPrice=totalPrice, compra_list = compra_list, conectado = g.conectado)
 
 @app.route("/perfil", methods = ['GET', 'POST'])
 def perfil():
