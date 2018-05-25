@@ -12,6 +12,7 @@ from models import User
 from models import Books
 from models import Compra
 from models import Carrito
+
 import os
 from werkzeug.utils import secure_filename
 from flask_wtf import CSRFProtect
@@ -100,6 +101,13 @@ def eliminarCarrito(identificador):
         return redirect(url_for('carrito'))
 
 
+@app.route("/mostrarLibros", methods = ['GET'])
+def mostrarLibros():
+    user = session['username']
+    compra_list = Carrito.query.join(Books).add_columns(Carrito.id, Books.titulo, Books.portada, Books.precio,Books.descripcion,Books.autor,Books.numeroPaginas)
+    return render_template('mostrarLibros.html', compra_list = compra_list, conectado = g.conectado)
+
+
 
 @app.route("/tienda", methods = ['GET'])
 def tienda():
@@ -121,6 +129,11 @@ def carrito():
 @app.route("/perfil", methods = ['GET', 'POST'])
 def perfil():
     us1=session['username']
+    compra_list = Carrito.query.join(Books).add_columns(Carrito.id, Books.titulo, Books.portada, Books.precio)
+    preciocart = Carrito.query.join(Books).add_columns(Books.id, Books.titulo, Books.portada, Books.precio)
+    totalPrice = 0
+    for preciocart in preciocart:
+        totalPrice += preciocart[4]
     
     print(us1)
     form = forms.tarjetaForm(request.form) 
@@ -162,7 +175,7 @@ def perfil():
         flash('DATOS CAMBIADOS EN LA BASE DE DATOS')
 
 
-    return render_template('perfil.html', conectado = g.conectado, form=form, form1=form1, us2=us2)
+    return render_template('perfil.html',totalPrice=totalPrice, compra_list = compra_list, conectado = g.conectado, form=form, form1=form1, us2=us2)
 
 
 @app.route('/login', methods = ['GET', 'POST'] )

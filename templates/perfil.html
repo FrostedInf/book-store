@@ -12,11 +12,12 @@
               <br></br>
               <div class="profile-usertitle-job">Nombre de Usuario: </div>
                 <div class="center-block" class="profile-usertitle-name"> <h4>{{us2.username}}</h4> </div>
-                <br></br>
+                
                 <div class="profile-usertitle-job">Correo Electronico: </div>
                 <div class="center-block" class="profile-usertitle-name"> <h4>{{us2.email}}</h4> </div>
-
+                
                 <br></br>
+                <a class= "btn btn-primary btn-sm" href="/mostrarLibros">Ver mis libros</a>
                 
             </div>
                      <div class="profile-usermenu" >
@@ -41,20 +42,22 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th>monto</th>
-                            <th>fecha</th>
+                            <th>idCompra</th>
+                            <th>TotalPagado</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for compra in compras %}
+                        {% if compra_list %}
+                        {% for libros in compra_list %}
                         <tr class="active">
                             <th><th>
-                            <th>{{compra.monto}}</th>
-                            <th>{{compra.created_date_compra}}</th>
+                            <th><h1>{{libros.id}}</h1></th>
+                            <th>{{totalPrice}}</th>
                             <th></th>
                         </tr>
                         {% endfor %}
+                        {% endif %}
                     </tbody>
                 </table>
             </div>
