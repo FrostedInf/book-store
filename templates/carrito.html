@@ -1,5 +1,6 @@
 {% extends 'plantillas/carritoPlantilla.html' %}
 {% from 'plantillas/_macroForms.html' import render_fields %}
+{% from 'plantillas/modals/_modalAgregadoCarrito.html' import modalAgregadoCarrito %}
 	{% block content %}
 
 	{% if compra_list %}
@@ -11,7 +12,7 @@
 		
 
 <div class="well padre" style="width: 85%;height: 58%" data-book={{libros.id}}>
-
+   <input type="hidden" name="csrf_token" id="idtoken" value="{{csrf_token()}}">
   <img src="{{url_for('static', filename=libros.portada)}}" alt="name" style="width: 29%;height: 96%;float: left">
   <h3>&emsp;&emsp;&emsp;&emsp;{{libros.titulo}}</h3>
   <div style="float: right;padding: 2%"></div>
@@ -29,13 +30,14 @@
 
 
 			<div><br></div>
-			<div><center>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<font style="float: rigth;top: 10%" size=6>TOTAL: $ {{totalPrice}}</font></center></div>
+			<div><center>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<font style="float: rigth;top: 10%" size=6 id="total">{{totalPrice}}</font></center></div>
 			<div><br></div>
 			<div><br></div>
 			<div><br></div>
 
-			<center><button type="submit" class="btn btn-lg btn-warning btnGuardar" style="float: center;center: 390%">Finalizar compra</button></center>
+			<center><button type="submit" class="btn btn-lg btn-warning btnFinalizar" style="float: center;center: 390%">Finalizar compra</button></center>
 
+{{modalAgregadoCarrito()}}
 
 
 {% endblock %}

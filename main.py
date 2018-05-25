@@ -91,7 +91,7 @@ def agregarCarrito():
         )
         db.session.add(carrito)
         db.session.commit()
-        return request.method
+        return redirect(url_for('busqueda'))
 
 @app.route("/eliminarCarrito/<int:identificador>" , methods=['GET'])
 def eliminarCarrito(identificador):
@@ -100,6 +100,7 @@ def eliminarCarrito(identificador):
         db.session.commit()
         return redirect(url_for('carrito'))
 
+<<<<<<< HEAD
 
 @app.route("/mostrarLibros", methods = ['GET'])
 def mostrarLibros():
@@ -108,6 +109,20 @@ def mostrarLibros():
     return render_template('mostrarLibros.html', compra_list = compra_list, conectado = g.conectado)
 
 
+=======
+@app.route("/finalizarCompra" , methods=['POST'])
+def finalizarCompra():
+    username = session['username']
+    print(username)
+    solicitud=request.get_json(force=True)
+    user = User.query.filter_by(username = username).first()
+    monto = solicitud['total']
+    print(monto)
+    compra = Compra( user.id, monto, "rfc")
+    db.session.add(compra)
+    db.session.commit()
+    return "ok"
+>>>>>>> master
 
 @app.route("/tienda", methods = ['GET'])
 def tienda():
@@ -115,9 +130,10 @@ def tienda():
 
 @app.route("/carrito", methods = ['GET'])
 def carrito():
-    user = session['username']
-    compra_list = Carrito.query.join(Books).add_columns(Carrito.id, Books.titulo, Books.portada, Books.precio)
-    preciocart = Carrito.query.join(Books).add_columns(Books.id, Books.titulo, Books.portada, Books.precio)
+    usercookie = session['username']
+    user = User.query.filter(User.username == usercookie).first()
+    compra_list = Carrito.query.join(Books).filter(Carrito.usuario_id == user.id ).add_columns(Carrito.id, Books.titulo, Books.portada, Books.precio).all()
+    preciocart = Carrito.query.join(Books).filter(Carrito.usuario_id == user.id ).add_columns(Books.id, Books.titulo, Books.portada, Books.precio).all()
     totalPrice = 0
     for preciocart in preciocart:
         totalPrice += preciocart[4]
@@ -139,7 +155,7 @@ def perfil():
     form = forms.tarjetaForm(request.form) 
     form1 = forms.envioForm(request.form)
     us2=User.query.filter_by(username=us1).first()
-    
+    compra = Compra.query.filter(Compra.users_id == us2.id ).all()
     # cargar datos de formulario tarjeta
     form.tarjeta.data = us2.numTarjeta
     form.titular.data = us2.titular
@@ -175,7 +191,11 @@ def perfil():
         flash('DATOS CAMBIADOS EN LA BASE DE DATOS')
 
 
+<<<<<<< HEAD
     return render_template('perfil.html',totalPrice=totalPrice, compra_list = compra_list, conectado = g.conectado, form=form, form1=form1, us2=us2)
+=======
+    return render_template('perfil.html', conectado = g.conectado, form=form, form1=form1, us2=us2, compras = compra)
+>>>>>>> master
 
 
 @app.route('/login', methods = ['GET', 'POST'] )
