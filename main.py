@@ -101,10 +101,14 @@ def tienda():
 @app.route("/carrito", methods = ['GET'])
 def carrito():
     compra_list = Carrito.query.join(Books).add_columns(Books.id, Books.titulo, Books.portada, Books.precio)
+    preciocart = Carrito.query.join(Books).add_columns(Books.id, Books.titulo, Books.portada, Books.precio)
     totalPrice = 0
-    for libros in compra_list:
-        totalPrice += libros[1]
+    for preciocart in preciocart:
+        totalPrice += preciocart[4]
     return render_template('carrito.html', totalPrice=totalPrice, compra_list = compra_list, conectado = g.conectado)
+
+
+
 
 @app.route("/perfil", methods = ['GET', 'POST'])
 def perfil():
