@@ -36,7 +36,7 @@ class User(db.Model):
 
     def verify_password(self, password):
         return check_password_hash(self.password, password)
-    
+
     def toJSON(self):
         return {'User':{ 'username': self.username,
             'email': self.email}}
@@ -83,7 +83,7 @@ class Compra(db.Model):
     RFC = db.Column(db.String(50))
     monto = db.Column(db.Float)
     users_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    libroCliente_id = db.relationship('LibroCliente')
+    libroCliente = db.relationship('LibroCliente',back_populates = 'compra', cascade="all, delete, delete-orphan")
     envio_id = db.relationship('Envio')
     created_date_compra = db.Column(db.DateTime, default = datetime.datetime.now)
 
@@ -99,6 +99,12 @@ class LibroCliente(db.Model):
         id_libro = db.Column(db.Integer, db.ForeignKey('libros.id'))
         cantidad = db.Column(db.Float)
         precio = db.Column(db.Float)
+        compra = db.relationship('Compra', back_populates = 'libroCliente')
+
+        def __init__(self,id_libro,cantidad,precio):
+            self.id_libro = id_libro
+            self.cantidad = cantidad
+            self.precio = precio
 
 class Administrador(db.Model):
     __tablename__ = 'administrador'

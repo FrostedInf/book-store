@@ -40,31 +40,25 @@
             <div class="portlet-body">
                 <table class="table">
                     <thead>
-                        <tr>
-<<<<<<< HEAD
-                            <th></th>
+                        <tr>                            
                             <th>idCompra</th>
-                            <th>TotalPagado</th>
-                            <th></th>
-=======
+                            <th>TotalPagado</th>            
                             <th>monto</th>
                             <th>fecha</th>
->>>>>>> master
+
                         </tr>
                     </thead>
                     <tbody>
                         {% if compra_list %}
                         {% for libros in compra_list %}
                         <tr class="active">
-<<<<<<< HEAD
-                            <th><th>
+
+                            
                             <th><h1>{{libros.id}}</h1></th>
-                            <th>{{totalPrice}}</th>
-                            <th></th>
-=======
-                            <th>{{compra.monto}}</th>
-                            <th>{{compra.created_date_compra}}</th>
->>>>>>> master
+                            <th>{{totalPrice}}</th>                        
+                            <th>{{libros.monto}}</th>
+                            <th>{{libros.created_date_compra}}</th>
+
                         </tr>
                         {% endfor %}
                         {% endif %}

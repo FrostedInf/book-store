@@ -1,5 +1,6 @@
 {% extends 'plantillas/busquedaPlantilla.html' %}
 {% from 'plantillas/_macroForms.html' import render_fields %}
+{% from 'plantillas/modals/_modalAgregadoCarrito.html' import AgregadoCarrito %}
 {% block content %}
 
 <form method="POST">
@@ -34,6 +35,6 @@
   </div>
   <p></p>
 </div>
-
+{{AgregadoCarrito()}}
 {% endfor %}
 {% endblock %}

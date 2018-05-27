@@ -8,11 +8,7 @@ from flask import url_for
 from flask import flash
 from flask import g
 from models import db
-from models import User
-from models import Books
-from models import Compra
-from models import Carrito
-
+from models import User, Books, Compra, Carrito, LibroCliente
 import os
 from werkzeug.utils import secure_filename
 from flask_wtf import CSRFProtect
@@ -37,7 +33,7 @@ def before_ver():
         g.conectado = False
         if 'username' in session:
             g.conectado = True
-        if 'username' not in session and request.endpoint in ['perfil', 'carrito', 'tienda', 'favouriteBooks', 'tienda']:
+        if 'username' not in session and request.endpoint in ['perfil', 'carrito', 'tienda', 'favouriteBooks','agregarCarrito']:
             return redirect(url_for('login'))
 
 @app.after_request
@@ -86,12 +82,12 @@ def agregarCarrito():
     if request.method == 'POST':
         print(username)
         solicitud=request.get_json(force=True)
+        print(solicitud['idLibro'])
         user = User.query.filter_by(username = username).first()
-        carrito = Carrito( user.id, solicitud['idLibro']
-        )
+        carrito = Carrito( user.id, solicitud['idLibro'])
         db.session.add(carrito)
         db.session.commit()
-        return redirect(url_for('busqueda'))
+        return "ok"
 
 @app.route("/eliminarCarrito/<int:identificador>" , methods=['GET'])
 def eliminarCarrito(identificador):
@@ -100,7 +96,7 @@ def eliminarCarrito(identificador):
         db.session.commit()
         return redirect(url_for('carrito'))
 
-<<<<<<< HEAD
+
 
 @app.route("/mostrarLibros", methods = ['GET'])
 def mostrarLibros():
@@ -108,25 +104,21 @@ def mostrarLibros():
     compra_list = Carrito.query.join(Books).add_columns(Carrito.id, Books.titulo, Books.portada, Books.precio,Books.descripcion,Books.autor,Books.numeroPaginas)
     return render_template('mostrarLibros.html', compra_list = compra_list, conectado = g.conectado)
 
-
-=======
 @app.route("/finalizarCompra" , methods=['POST'])
 def finalizarCompra():
     username = session['username']
     print(username)
     solicitud=request.get_json(force=True)
     user = User.query.filter_by(username = username).first()
+    libros = Carrito.query.join(Books).filter(Carrito.usuario_id == user.id ).add_columns(Books.id, Books.titulo, Books.portada, Books.precio).all()
     monto = solicitud['total']
-    print(monto)
     compra = Compra( user.id, monto, "rfc")
+    for libro in libros:
+        compra.libroCliente.append(LibroCliente(libro.id,1,libro.precio))
+        print(compra.libroCliente)
     db.session.add(compra)
     db.session.commit()
     return "ok"
->>>>>>> master
-
-@app.route("/tienda", methods = ['GET'])
-def tienda():
-    return render_template('tienda.html', conectado = g.conectado)
 
 @app.route("/carrito", methods = ['GET'])
 def carrito():
@@ -139,9 +131,6 @@ def carrito():
         totalPrice += preciocart[4]
     return render_template('carrito.html', totalPrice=totalPrice, compra_list = compra_list, conectado = g.conectado)
 
-
-
-
 @app.route("/perfil", methods = ['GET', 'POST'])
 def perfil():
     us1=session['username']
@@ -152,7 +141,7 @@ def perfil():
         totalPrice += preciocart[4]
     
     print(us1)
-    form = forms.tarjetaForm(request.form) 
+    form = forms.tarjetaForm(request.form)
     form1 = forms.envioForm(request.form)
     us2=User.query.filter_by(username=us1).first()
     compra = Compra.query.filter(Compra.users_id == us2.id ).all()
@@ -160,7 +149,7 @@ def perfil():
     form.tarjeta.data = us2.numTarjeta
     form.titular.data = us2.titular
     form.fecha.data = us2.fechaVencimiento
-    form.cvc.data = us2.cvc     
+    form.cvc.data = us2.cvc
     # cargar datos de formulario envio
     form1.pais.data = us2.pais
     form1.direccion.data =us2.direccion
@@ -174,14 +163,14 @@ def perfil():
         us2.numTarjeta = form2.tarjeta.data
         us2.titular = form2.titular.data
         us2.fechaVencimiento = form2.fecha.data
-        us2.cvc = form2.cvc.data     
+        us2.cvc = form2.cvc.data
         db.session.commit()
         flash('Usuario registrado en la base de datos')
 
 
-    if request.method == 'POST' and form.validate():      
+    if request.method == 'POST' and form.validate():
         form3 = forms.envioForm(request.form)
-        us2.pais = form3.pais.data    
+        us2.pais = form3.pais.data
         us2.direccion = form3.direccion.data
         us2.cp = form3.cp.data
         us2.ciudad = form3.ciudad.data
@@ -190,13 +179,7 @@ def perfil():
         db.session.commit()
         flash('DATOS CAMBIADOS EN LA BASE DE DATOS')
 
-
-<<<<<<< HEAD
-    return render_template('perfil.html',totalPrice=totalPrice, compra_list = compra_list, conectado = g.conectado, form=form, form1=form1, us2=us2)
-=======
-    return render_template('perfil.html', conectado = g.conectado, form=form, form1=form1, us2=us2, compras = compra)
->>>>>>> master
-
+    return render_template('perfil.html', conectado = g.conectado, form=form, form1=form1, us2=us2, compra_list = compra)
 
 @app.route('/login', methods = ['GET', 'POST'] )
 def login():
@@ -219,10 +202,7 @@ def logout():
     if 'username' in session:
         session.pop('username')
     return redirect(url_for('login'))
-
-@app.route('/libros_favoritos', methods = ['GET', 'POST'])
-def favouriteBooks():
-    return render_template('librosFavoritos.html', conectado = g.conectado)
+    
 # Admin Controllers
 @app.route('/admin', methods = ['GET', 'POST'])
 def admin():
@@ -258,8 +238,7 @@ def createBooks():
         form.genero.data,
         form.autor.data,
         form.precio.data,
-        otherpath
-        )
+        otherpath)
         db.session.add(book)
         db.session.commit()
         return redirect(url_for('admin'))
@@ -280,7 +259,7 @@ def deleteBooks(identificador):
 def showBook(identificador):
     book = Books.query.filter_by(id = identificador).first()
     jsonStr = json.dumps(book.toJSON())
-    return jsonStr  
+    return jsonStr
 
 @app.route('/admin/edit_book/<int:identificador>', methods = ['GET','POST'])
 def editBook(identificador):
@@ -293,7 +272,7 @@ def editBook(identificador):
     form.genero.data = book.genero
     form.autor.data = book.autor
     form.precio.data = book.precio
-    #Actuliza los datos en base
+    # Actualiza los datos en base
     if request.method == 'POST' and form.validate():
         form2 = forms.BookFormRegister(request.form)
         book.titulo = form2.titulo.data

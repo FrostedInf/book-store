@@ -30,15 +30,16 @@ function agregarCarrito($idLibro,$token){
 	$.ajax({
 		url: '/agregarCarrito',
 		type: 'POST',
-		dataType: 'json',
+		dataType: 'text',
 		contentType:'application/json',
-		data: JSON.stringify(datasend),
+		data:JSON.stringify(datasend),
 		beforeSend: function(xhr){
 			xhr.setRequestHeader("X-CSRFToken",$token);
 		}
 	})
 	.done(function() {
 		console.log("success");
+		console.log($("#agregadoCarrito").find())
 		$("#agregadoCarrito").modal();
 	})
 	.fail(function(xhr, status, error) {
@@ -75,7 +76,7 @@ function eliminarCarrito($identificador,$token){
 }
 
 function finalizarCompra($idLibro,$token){
-	var total = $("#total").text(); 
+	var total = $("#total").text();
 	var datasend = {"total": total }
 	$.ajax({
 		url: '/finalizarCompra',

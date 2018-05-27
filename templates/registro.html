@@ -2,26 +2,29 @@
 {% from 'plantillas/_macroForms.html' import render_fields %}
 
 {% block content %}
-	<div>
-        <h1>Registro de usuarios</h1>
-        <form method="POST" class="form">
-            <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
-                <div class="row">
-                    <div class="form-group col-xs-12">
-                        {{render_fields(form.username, class='form-control')}}
+	<div class="container">
+            <h1>Registro de usuarios</h1>
+        <div class="col-centered col-md-8">
+            <form method="POST" class="form">
+                <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+                    <div class="row">
+                        <div class="form-group col-xs-12">
+                            {{render_fields(form.username, class='form-control')}}
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-xs-12">
-                        {{render_fields(form.email, class='form-control')}}
+                    <div class="row">
+                        <div class="form-group col-xs-12">
+                            {{render_fields(form.email, class='form-control')}}
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-xs-12">
-                        {{render_fields(form.password, class='form-control')}}
+                    <div class="row">
+                        <div class="form-group col-xs-12">
+                            {{render_fields(form.password, class='form-control')}}
+                        </div>
                     </div>
-                </div>
-                <button type="submit" class="btn btn-default">Registrar</button>
-            </form>
+                    <button type="submit" class="btn btn-default">Registrar</button>
+                </form>
+        </div>
+        
     </div>
 {% endblock  %}
