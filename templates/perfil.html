@@ -41,24 +41,18 @@
                 <table class="table">
                     <thead>
                         <tr>                            
-                            <th>idCompra</th>
-                            <th>TotalPagado</th>            
+                            <th>idCompra</th>            
                             <th>monto</th>
                             <th>fecha</th>
-
                         </tr>
                     </thead>
                     <tbody>
                         {% if compra_list %}
-                        {% for libros in compra_list %}
-                        <tr class="active">
-
-                            
-                            <th><h1>{{libros.id}}</h1></th>
-                            <th>{{totalPrice}}</th>                        
-                            <th>{{libros.monto}}</th>
-                            <th>{{libros.created_date_compra}}</th>
-
+                        {% for compra in compra_list %}
+                        <tr class="active">                
+                            <th><h1>{{compra.id}}</h1></th>
+                            <th>{{compra.monto}}</th>
+                            <th>{{compra.created_date_compra}}</th>
                         </tr>
                         {% endfor %}
                         {% endif %}
@@ -67,7 +61,7 @@
             </div>
         </div>
         <div>
-            <button class="btn col-md-12" data-toggle="collapse" data-target="#BtnTarjeta" style="" >
+            <button class="btn col-md-12 col-xs-12" data-toggle="collapse" data-target="#BtnTarjeta" style="" >
             Mi información
             </button>           
         </div>
@@ -88,7 +82,15 @@
                         <div>
                         {{render_fields(form.cvc, placeholder=" 123 ", class="form-control" )}}
                         </div>
+                        <div class="text-center" style="margin-top: 3%">
+                            <button type="submit" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalTarjeta" >
+                            Guardar cambios
+                        </button>
+                        </div>
+                </form>
+                <form method="POST">
                         <div><h4>mis datos de envio</h4></div>
+                        <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
                         <div>
                         {{render_fields(form1.pais, placeholder="Nombre: del país", class="form-control" )}}
                         </div>
@@ -104,8 +106,6 @@
                         <div>
                         {{render_fields(form1.telefono, placeholder="(044)22 88 48 43 35", class="form-control" )}}
                         </div>
-                 
-                    <!-- Trigger the modal with a button -->
                         <div class="text-center" style="margin-top: 3%">
                             <button type="submit" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalTarjeta" >
                             Guardar cambios

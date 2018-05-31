@@ -16,7 +16,7 @@ class User(db.Model):
     password = db.Column(db.String(100))
     numTarjeta = db.Column(db.String(40))
     titular = db.Column(db.String(40))
-    fechaVencimiento = db.Column(db.Date)
+    fechaVencimiento = db.Column(db.String(40))
     cvc = db.Column(db.String(40))
     pais = db.Column(db.String(40))
     direccion = db.Column(db.String(40))

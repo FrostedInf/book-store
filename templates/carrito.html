@@ -1,5 +1,6 @@
 {% extends 'plantillas/carritoPlantilla.html' %}
 {% from 'plantillas/_macroForms.html' import render_fields %}
+{% from 'plantillas/modals/_modalCompraFinalizada.html' import finalizoCompra %}
 	{% block content %}
 
 	{% if compra_list %}
@@ -28,15 +29,19 @@
 
 
 
-			<div><br></div>
-			<div><center>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<font style="float: rigth;top: 10%" size=6 id="total">{{totalPrice}}</font></center></div>
-			<div><br></div>
-			<div><br></div>
-			<div><br></div>
-
-			<center><button type="submit" class="btn btn-lg btn-warning btnFinalizar" style="float: center;center: 390%">Finalizar compra</button></center>
-
-
+	<div class="col-md-8 col-centered">
+		<div class="text-right">
+			<font>$</font><font style="top: 10%" size=6 id="total">{{totalPrice}}</font>
+		</div>
+	</div>
+			
+	<div class="text-center">
+		<button class="btn btn-lg btn-warning btnCancelarCompra">Cancelar Compra</button>
+		<button type="submit" class="btn btn-lg btn-warning btnFinalizar" >Finalizar compra</button>
+	</div>
+			
+			
+	{{finalizoCompra()}}
 
 
 {% endblock %}

@@ -21,6 +21,11 @@ $(document).ready(function(){
 		$token=$("#idtoken").val();
 		finalizarCompra($idLibro,$token);
 	})
+
+	$(".btnCancelarCompra").click(function(event){
+		$token=$("#idtoken").val();
+		cancelarCompra($token);
+	})
 });
 
 function agregarCarrito($idLibro,$token){
@@ -50,7 +55,6 @@ function agregarCarrito($idLibro,$token){
 		console.log("complete");
 	});
 }
-
 function eliminarCarrito($identificador,$token){
 	var data = $identificador.attr('data-book');
 	console.log(data);
@@ -74,14 +78,13 @@ function eliminarCarrito($identificador,$token){
 		console.log("complete");
 	});
 }
-
 function finalizarCompra($idLibro,$token){
 	var total = $("#total").text();
 	var datasend = {"total": total }
 	$.ajax({
 		url: '/finalizarCompra',
 		type: 'POST',
-		dataType: 'json',
+		dataType: 'text',
 		contentType:'application/json',
 		data: JSON.stringify(datasend),
 		beforeSend: function(xhr){
@@ -90,9 +93,32 @@ function finalizarCompra($idLibro,$token){
 	})
 	.done(function() {
 		console.log("success");
+		$("#modalCompraFinalizada").modal();
+		location.reload()
 	})
 	.fail(function() {
 		console.log("error");
+	})
+	.always(function() {
+		console.log("complete");
+	});
+}
+function cancelarCompra($token){
+	$.ajax({
+		url: '/cancelarCompra',
+		dataType: 'text',
+		type: 'GET',
+		beforeSend: function(xhr){
+			xhr.setRequestHeader("X-CSRFToken",$token);
+		}
+	})
+	.done(function() {
+		console.log("success");
+		location.reload()
+	})
+	.fail(function(xhr, status, error) {
+		console.log("error");
+		console.log(error);
 	})
 	.always(function() {
 		console.log("complete");
