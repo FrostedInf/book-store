@@ -96,12 +96,10 @@ def eliminarCarrito(identificador):
         db.session.commit()
         return redirect(url_for('carrito'))
 
-
-
 @app.route("/mostrarLibros", methods = ['GET'])
 def mostrarLibros():
     user = session['username']
-    compra_list = Carrito.query.join(Books).add_columns(Carrito.id, Books.titulo, Books.portada, Books.precio,Books.descripcion,Books.autor,Books.numeroPaginas)
+    compra_list = LibroCliente.query.join(Books).add_columns(LibroCliente.id, Books.titulo, Books.portada, Books.precio,Books.descripcion,Books.autor,Books.numeroPaginas)
     return render_template('mostrarLibros.html', compra_list = compra_list, conectado = g.conectado)
 
 @app.route("/finalizarCompra" , methods=['POST'])
@@ -117,6 +115,16 @@ def finalizarCompra():
         compra.libroCliente.append(LibroCliente(libro.id,1,libro.precio))
         print(compra.libroCliente)
     db.session.add(compra)
+    db.session.query(Carrito).filter(Carrito.usuario_id == user.id).delete()
+    db.session.commit()
+    return "ok"
+
+@app.route("/cancelarCompra" , methods=['GET'])
+def cancelarCompra():
+    username = session['username']
+    print(username)
+    user = User.query.filter_by(username = username).first()
+    db.session.query(Carrito).filter(Carrito.usuario_id == user.id).delete()
     db.session.commit()
     return "ok"
 
@@ -134,16 +142,15 @@ def carrito():
 @app.route("/perfil", methods = ['GET', 'POST'])
 def perfil():
     us1=session['username']
-    compra_list = Carrito.query.join(Books).add_columns(Carrito.id, Books.titulo, Books.portada, Books.precio)
-    preciocart = Carrito.query.join(Books).add_columns(Books.id, Books.titulo, Books.portada, Books.precio)
-    totalPrice = 0
-    for preciocart in preciocart:
-        totalPrice += preciocart[4]
-    
+    us2=User.query.filter_by(username=us1).first()
     print(us1)
+    #forms de precargado de datos 
     form = forms.tarjetaForm(request.form)
     form1 = forms.envioForm(request.form)
-    us2=User.query.filter_by(username=us1).first()
+    #forms para actualizar los datos en base de datos 
+    form2 = forms.tarjetaForm(request.form)
+    form3 = forms.envioForm(request.form)
+    #Datoa para Tabla de historial de compra
     compra = Compra.query.filter(Compra.users_id == us2.id ).all()
     # cargar datos de formulario tarjeta
     form.tarjeta.data = us2.numTarjeta
@@ -159,17 +166,15 @@ def perfil():
     form1.telefono.data =us2.telefono
 
     if request.method == 'POST' and form.validate():
-        form2 = forms.tarjetaForm(request.form)
         us2.numTarjeta = form2.tarjeta.data
         us2.titular = form2.titular.data
         us2.fechaVencimiento = form2.fecha.data
         us2.cvc = form2.cvc.data
         db.session.commit()
-        flash('Usuario registrado en la base de datos')
+        
 
 
-    if request.method == 'POST' and form.validate():
-        form3 = forms.envioForm(request.form)
+    if request.method == 'POST' and form1.validate():
         us2.pais = form3.pais.data
         us2.direccion = form3.direccion.data
         us2.cp = form3.cp.data
@@ -177,7 +182,7 @@ def perfil():
         us2.estado = form3.estado.data
         us2.telefono = form3.telefono.data
         db.session.commit()
-        flash('DATOS CAMBIADOS EN LA BASE DE DATOS')
+        
 
     return render_template('perfil.html', conectado = g.conectado, form=form, form1=form1, us2=us2, compra_list = compra)
 
@@ -243,7 +248,6 @@ def createBooks():
         db.session.commit()
         return redirect(url_for('admin'))
     return render_template('admin_views/view_create_books.html', form = form)
-
 
 @app.route('/admin/delete_books/<int:identificador>', methods = ['POST'])
 def deleteBooks(identificador):
