@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="container-fluid">
-    <div class="col-md-4">
+    <div class="col-md-4 col-xs-12">
         <div class="portlet light profile-sidebar-portlet bordered">
             <div class="profile-userpic">
                 <img src="{{url_for('static', filename='img/nav_bar_logo/user.png')}}" class="img-responsive" alt="">
@@ -16,9 +16,8 @@
                 <div class="profile-usertitle-job">Correo Electronico: </div>
                 <div class="center-block" class="profile-usertitle-name"> <h4>{{us2.email}}</h4> </div>
                 
-                <br></br>
                 <a class= "btn btn-primary btn-sm" href="/mostrarLibros">Ver mis libros</a>
-                
+                <a class= "btn btn-primary btn-sm" href="/enviosPendientes">Envios pendientes</a>
             </div>
                      <div class="profile-usermenu" >
                 <ul class="nav">

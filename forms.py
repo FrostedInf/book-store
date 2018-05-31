@@ -27,7 +27,7 @@ class BookFormRegister(Form):
     """docstring for BookFormRegister"""
     titulo =  StringField('titulo', [validators.DataRequired()])
     editorial = StringField('Editorial', [validators.DataRequired()])
-    numeroPaginas = IntegerField('numero', [validators.DataRequired()])
+    numeroPaginas = IntegerField('numero de paginas', [validators.DataRequired()])
     precio = FloatField('precio', [validators.DataRequired()])
     genero = StringField('genero', [validators.DataRequired()])
     autor = StringField('autor', [validators.DataRequired()])

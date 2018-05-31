@@ -8,7 +8,7 @@ from flask import url_for
 from flask import flash
 from flask import g
 from models import db
-from models import User, Books, Compra, Carrito, LibroCliente
+from models import User, Books, Compra, Carrito, LibroCliente, Envio
 import os
 from werkzeug.utils import secure_filename
 from flask_wtf import CSRFProtect
@@ -117,6 +117,7 @@ def finalizarCompra():
     for libro in libros:
         compra.libroCliente.append(LibroCliente(libro.id,1,libro.precio))
         print(compra.libroCliente)
+    compra.envio = [Envio(user.pais,user.direccion,user.cp, user.ciudad,user.estado,user.telefono)]
     db.session.add(compra)
     db.session.query(Carrito).filter(Carrito.usuario_id == user.id).delete()
     db.session.commit()
@@ -210,7 +211,17 @@ def logout():
     if 'username' in session:
         session.pop('username')
     return redirect(url_for('login'))
-    
+
+@app.route('/enviosPendientes', methods = ['GET', 'POST'])
+def enviosPendientes():
+    username = session['username']
+    user = User.query.filter_by(username = username).first()
+    compra = Compra.query.filter(Compra.users_id == user.id).first()
+    print(compra)
+    envio = Envio.query.filter(Envio.compra_id == compra.id).all()
+    print(envio)
+    return render_template('enviosPendientes.html', conectado = g.conectado, envios = envio)
+
 # Admin Controllers
 @app.route('/admin', methods = ['GET', 'POST'])
 def admin():

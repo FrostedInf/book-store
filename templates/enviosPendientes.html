@@ -1,0 +1,33 @@
+{% extends 'plantillas/busquedaPlantilla.html' %}
+{% from 'plantillas/_macroForms.html' import render_fields %}
+{% block content %}
+
+<div><br></div>
+
+<div><br></div>
+
+<div><br></div>
+<div>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <font style="float: left;top: 10%" size=6>Envio Pendientes</font></div>
+<div><br></div>
+
+<div><br></div>
+<div> 
+{% if envios %}
+	<div>
+      {% for envio in envios %}
+      
+<div>
+	<div class="well" style="position: absolute;width: 100%;height: 107%">
+  <div class="well padre" style="width: 85%;height: 58%">
+  <h3>&emsp;&emsp;&emsp;&emsp;Direccion: {{envio.direccion}}</h3>
+  <h3>&emsp;&emsp;&emsp;&emsp;Pais: {{envio.pais}}</h3>
+  <h3>&emsp;&emsp;&emsp;&emsp;Estado: {{envio.estado}}</h3>
+  <h3>&emsp;&emsp;&emsp;&emsp;Ciudad: {{envio.ciudad}}</h3>
+  </div>
+{% endfor %} 
+{% endif %}
+
+</div>
+
+
+{% endblock %}

@@ -84,7 +84,7 @@ class Compra(db.Model):
     monto = db.Column(db.Float)
     users_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     libroCliente = db.relationship('LibroCliente',back_populates = 'compra', cascade="all, delete, delete-orphan")
-    envio_id = db.relationship('Envio')
+    envio = db.relationship('Envio',back_populates = 'compra', cascade="all, delete, delete-orphan")
     created_date_compra = db.Column(db.DateTime, default = datetime.datetime.now)
 
     def __init__(self, users_id, monto, RFC):
@@ -122,6 +122,15 @@ class Envio(db.Model):
     estado = db.Column(db.String(40))
     telefono = db.Column(db.String(40))
     compra_id = db.Column(db.Integer, db.ForeignKey('compra.id'))
+    compra = db.relationship('Compra', back_populates = 'envio')
+    
+    def __init__(self,pais,direccion,cp, ciudad, estado, telefono):
+            self.pais = pais
+            self.direccion = direccion
+            self.cp = cp
+            self.ciudad = ciudad
+            self.estado = estado
+            self.telefono = telefono 
 
 class Carrito(db.Model):
     __tablename__='carrito'
