@@ -98,8 +98,11 @@ def eliminarCarrito(identificador):
 
 @app.route("/mostrarLibros", methods = ['GET'])
 def mostrarLibros():
-    user = session['username']
-    compra_list = LibroCliente.query.join(Books).add_columns(LibroCliente.id, Books.titulo, Books.portada, Books.precio,Books.descripcion,Books.autor,Books.numeroPaginas)
+    username = session['username']
+    user = User.query.filter_by(username = username).first()
+    compra = Compra.query.filter(Compra.users_id == user.id).first()
+    libro_cliente = LibroCliente.query.filter(LibroCliente.id_compra == compra.id).first()
+    compra_list = Books.query.filter(Books.id == libro_cliente.id_libro )
     return render_template('mostrarLibros.html', compra_list = compra_list, conectado = g.conectado)
 
 @app.route("/finalizarCompra" , methods=['POST'])

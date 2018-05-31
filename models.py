@@ -116,7 +116,6 @@ class Envio(db.Model):
     __tablename__ = 'envio'
     id = db.Column(db.Integer, primary_key=True)
     pais = db.Column(db.String(40))
-    colonia = db.Column(db.String(40))
     direccion = db.Column(db.String(40))
     cp = db.Column(db.String(40))
     ciudad = db.Column(db.String(40))
