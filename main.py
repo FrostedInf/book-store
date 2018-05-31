@@ -50,6 +50,8 @@ def index():
 def contactView():
     return render_template('contact.html', conectado = g.conectado)
 
+
+
 @app.route('/registro', methods = ['GET', 'POST'])
 def register():
     form = forms.UserFormRegister(request.form)
@@ -104,6 +106,11 @@ def mostrarLibros():
     compra_list = Carrito.query.join(Books).add_columns(Carrito.id, Books.titulo, Books.portada, Books.precio,Books.descripcion,Books.autor,Books.numeroPaginas)
     return render_template('mostrarLibros.html', compra_list = compra_list, conectado = g.conectado)
 
+#<<<<<<< Updated upstream
+#=======
+
+
+#>>>>>>> Stashed changes
 @app.route("/finalizarCompra" , methods=['POST'])
 def finalizarCompra():
     username = session['username']
@@ -119,6 +126,14 @@ def finalizarCompra():
     db.session.add(compra)
     db.session.commit()
     return "ok"
+#<<<<<<< Updated upstream
+#=======
+
+
+@app.route("/tienda", methods = ['GET'])
+def tienda():
+    return render_template('tienda.html', conectado = g.conectado)
+#>>>>>>> Stashed changes
 
 @app.route("/carrito", methods = ['GET'])
 def carrito():
@@ -179,7 +194,17 @@ def perfil():
         db.session.commit()
         flash('DATOS CAMBIADOS EN LA BASE DE DATOS')
 
+#<<<<<<< Updated upstream
     return render_template('perfil.html', conectado = g.conectado, form=form, form1=form1, us2=us2, compra_list = compra)
+#=======
+
+#<<<<<<< HEAD
+ #  return render_template('perfil.html',totalPrice=totalPrice, compra_list = compra_list, conectado = g.conectado, form=form, form1=form1, us2=us2)
+#=======
+  # return render_template('perfil.html', conectado = g.conectado, form=form, form1=form1, us2=us2, compras = compra)
+#>>>>>>> master
+
+#>>>>>>> Stashed changes
 
 @app.route('/login', methods = ['GET', 'POST'] )
 def login():
